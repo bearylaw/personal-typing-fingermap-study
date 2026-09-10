@@ -170,6 +170,13 @@ Confirmed on held-out text:
 
 ![finger load](figures/fig5_fingerload.png)
 
+**A caveat visible in that figure.** The aggregate improves, but not every finger does.
+ZEHN puts *more* on the left pinky than AdNW (10.7% vs 6.0%) and much less on the right
+ring (6.9% vs 14.6%). If your problem is specifically a left pinky, this is not the layout
+for you — take the 38% or 41% row of the frontier table instead, or re-run the search with
+a per-finger cap rather than an aggregate one. The constraint used here was on the sum of
+the four weak fingers, and a sum can improve while a component worsens.
+
 ### 5. The result holds across every workload tested
 *(Level 1 — held-out text only)*
 
