@@ -1,0 +1,40 @@
+
+### objective: forced
+   AdNWzjßf       4.3866
+   AdNW           4.4313
+   KOY            4.5932
+   QWERTZ         8.6317
+   restart 1/6:     3.2957 (best     3.2957)
+   restart 2/6:     3.2971 (best     3.2957)
+   restart 3/6:     3.2728 (best     3.2728)
+   restart 4/6:     3.2729 (best     3.2728)
+   restart 5/6:     3.3162 (best     3.2728)
+   restart 6/6:     3.3143 (best     3.2728)
+   spread 3.2728..3.3162 (sd 0.0173)
+   best published is +34.03% away from this optimum
+   MECH-FORCED
+    l s y w g ä , d o b k
+     r n e c m u i t a h f
+      j x ß v q . ö z ü p
+   string: lsywgä,dobkrnecmuitahfjxßvq.özüp
+
+### objective: time
+   AdNWzjßf      32.0605
+   AdNW          32.0637
+   KOY           32.1354
+   QWERTZ        36.1005
+   restart 1/6:    31.5148 (best    31.5148)
+   restart 2/6:    31.4982 (best    31.4982)
+   restart 3/6:    31.5094 (best    31.4982)
+   restart 4/6:    31.4658 (best    31.4658)
+   restart 5/6:    31.4727 (best    31.4658)
+   restart 6/6:    31.4976 (best    31.4658)
+   spread 31.4658..31.5148 (sd 0.0180)
+   best published is +1.89% away from this optimum
+   MECH-TIME
+    l f y w c . i o d x p
+     r s e g m u , a t h n
+      j z ä b v ü ö q k ß
+   string: lfywc.iodxprsegmu,athnjzäbvüöqkß
+
+written to result_sim_dev-at.txt

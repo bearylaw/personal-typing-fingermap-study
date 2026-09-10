@@ -1,0 +1,17 @@
+perturbing 25 Model-A weights by +/-40%, 200 trials, scored on held-out dev-at/test
+
+layout          win%   top2%  mean rank  worst rank
+---------------------------------------------------
+ZEHN-C          52.5    97.5       1.51           5
+ZEHN            47.0   100.0       1.53           2
+KOY              0.5     1.0       4.41           5
+QWERTZ           0.0     0.0      10.00          10
+Neo2             0.0     0.0       9.00           9
+Bone             0.0     0.0       7.54           8
+AdNW             0.0     0.0       4.37           6
+AdNWzjßf         0.0     1.5       3.20           4
+KOU              0.0     0.0       6.05           7
+VOU              0.0     0.0       7.38           8
+
+Reading: a layout that wins under almost any reasonable weighting is a real
+finding. One that wins only at my exact weights is a tuning artefact.

@@ -1,0 +1,50 @@
+============================================================================================
+A/B  Different workloads, held-out text only
+============================================================================================
+profile    layout       ms/char   weak%   home%   sciss%   redir%
+-----------------------------------------------------------------
+dev-at     ZEHN          32.066    34.6    60.1     0.11     3.59
+dev-at     AdNW          32.149    41.3    60.1     0.10     3.67
+dev-at     AdNWzjßf      32.146    41.3    60.1     0.07     3.67
+dev-at     KOY           32.212    37.9    60.1     0.07     3.33
+dev-at     QWERTZ        36.123    28.5    24.7     5.61    12.51
+-----------------------------------------------------------------
+german     ZEHN          31.876    34.7    62.3     0.12     3.81
+german     AdNW          31.969    43.2    62.3     0.09     3.70
+german     AdNWzjßf      31.967    43.2    62.3     0.03     3.70
+german     KOY           32.022    38.2    62.3     0.03     3.41
+german     QWERTZ        37.174    23.4    23.6     5.44    11.28
+-----------------------------------------------------------------
+english    ZEHN          32.075    35.2    59.7     0.04     3.01
+english    AdNW          32.050    39.9    59.7     0.08     3.73
+english    AdNWzjßf      32.048    39.9    59.7     0.07     3.73
+english    KOY           32.172    37.5    59.7     0.06     3.16
+english    QWERTZ        35.082    32.3    25.1     5.72    13.38
+-----------------------------------------------------------------
+code       ZEHN          32.399    33.4    56.7     0.16     3.81
+code       AdNW          32.591    39.5    56.7     0.17     3.58
+code       AdNWzjßf      32.585    39.5    56.7     0.16     3.58
+code       KOY           32.603    37.8    56.7     0.18     3.41
+code       QWERTZ        35.479    33.1    26.2     5.81    13.92
+-----------------------------------------------------------------
+de-heavy   ZEHN          31.968    34.7    61.2     0.11     3.67
+de-heavy   AdNW          32.048    42.2    61.2     0.09     3.69
+de-heavy   AdNWzjßf      32.045    42.2    61.2     0.05     3.69
+de-heavy   KOY           32.110    38.0    61.2     0.05     3.36
+de-heavy   QWERTZ        36.586    26.2    24.2     5.53    11.91
+-----------------------------------------------------------------
+balanced   ZEHN          32.114    34.5    59.6     0.11     3.56
+balanced   AdNW          32.201    40.9    59.6     0.11     3.66
+balanced   AdNWzjßf      32.198    40.9    59.6     0.09     3.66
+balanced   KOY           32.263    37.8    59.6     0.09     3.33
+balanced   QWERTZ        35.924    29.6    24.9     5.65    12.80
+
+============================================================================================
+C  Worst case over the 36-point physical parameter sweep (held-out dev-at)
+============================================================================================
+ZEHN minus AdNW, ms/char: min -0.1749  max +0.0508  mean -0.0114
+ZEHN is at least as fast as AdNW in 13/36 of the parameter settings.
+
+Reading: the weak-finger gap is large and stable across every workload. The
+speed difference is small in both directions, which is the honest claim --
+ZEHN buys load relief at no measurable speed cost, not a speed improvement.

@@ -1,0 +1,38 @@
+  base        -> xflcbäuo.pqrsntdyeaihkßwmgvöü,zj
+  sfb+        -> xflcbqou.kzrsntdäeiahpßwmgvöü,yj
+  sfb++       -> puäoxbdlcfßhiea,gtnrszkyö.üvwmjq
+  sfb++bal-   -> xflcbüuäopzrsntd,ieahkßwmgvy.öqj
+  sciss+      -> puäoxbdlcfßhiea,gtnrszkyö.üvwmjq
+  redir+      -> fbldwqou.yzsnrtgäeiahkßpcmvöü,xj
+  travel+     -> fcldbüoäukqsrntg,aeihpßzmwvx.öyj
+  allround    -> xflcbüuäopzrsntd,ieahkßwmgvy.öqj
+  allround2   -> pflmbqou.yznsrtdäeiahkßgcwvöü,xj
+
+### Independent criteria on TRAIN (the search never sees these)
+layout         h2h  comp        SFB%    skip%    mm/1k   sciss%   redir%    weak%    home%    imbal   rollIn    wpm_B
+---------------------------------------------------------------------------------------------------------------------
+AdNW                            1.16     7.59 16096.16     0.10     3.48    41.67    60.69     3.45    15.35   158.82
+AdNWzjßf                        1.16     7.59 15927.84     0.06     3.48    41.67    60.69     3.45    15.36   159.06
+KOY                             1.16     8.02 15932.98     0.06     3.15    38.62    60.69     3.45    15.80   159.61
+KOU                             1.49     8.19 15962.31     0.13     3.09    39.32    60.69     2.99    15.66   158.01
+Bone                            2.14     7.87 18389.62     0.49     6.93    33.65    54.76     4.72    14.97   150.30
+best-of-any                     1.16     7.59 15927.84     0.06     3.09    33.65    60.69     2.99    15.80   159.61
+---------------------------------------------------------------------------------------------------------------------
+base             5     2        1.54     8.13 16114.28     0.29     3.47    33.74    60.69     1.83    16.85   159.49
+sfb+             4     3        1.23     8.13 16134.45     0.27     3.66    33.91    60.69     1.83    16.78   160.05
+sfb++            6     4        1.13     7.25 16177.42     0.21     3.74    37.25    60.69     2.14    16.22   159.22
+sfb++bal-        7     5        1.15     7.48 16147.52     0.26     3.41    36.35    60.69     1.83    17.70   160.02
+sciss+           6     4        1.13     7.25 16177.42     0.21     3.74    37.25    60.69     2.14    16.22   159.22
+redir+           6     2        1.22     7.87 16178.63     0.32     3.42    35.66    60.69     2.73    16.11   159.44
+travel+          5     3        1.17     7.29 16085.86     0.17     3.85    37.25    60.69     1.88    16.52   159.38
+allround         7     5        1.15     7.48 16147.52     0.26     3.41    36.35    60.69     1.83    17.70   160.02
+allround2        6     2        1.26     7.60 16149.06     0.24     3.14    36.27    60.69     2.73    16.46   159.35
+
+selected: 'sfb++bal-'  -> beats the majority of rivals on 7/10 untuned criteria, beats the best-of-any composite on 5/10
+ZEHN
+    x f l c b ü u ä o p z
+     r s n t d , i e a h k
+      ß w m g v y . ö q j
+string: xflcbüuäopzrsntd,ieahkßwmgvy.öqj
+
+written to result_dev-at.txt

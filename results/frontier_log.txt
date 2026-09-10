@@ -1,0 +1,24 @@
+published layouts, for reference (TRAIN):
+layout         ms/char    weak%
+QWERTZ          36.101     28.5
+Neo2            35.556     28.7
+Bone            32.534     33.7
+AdNW            32.064     41.7
+AdNWzjßf        32.060     41.7
+KOY             32.135     38.6
+KOU             32.325     39.3
+VOU             32.381     38.3
+
+ ceiling   ms/char   weak%  test ms/ch  test weak%   layout
+----------------------------------------------------------------------------------------------------
+      28    32.067    28.0      32.188        27.8   zöakpüäryqßstehd,uncfmxjobvi.lgw
+      30    32.008    29.9      32.138        29.7   äßrqp.iaybfstndhu,ecmwxjlkzüöogv
+      32    31.870    32.0      31.980        31.9   z,oöypkrvwgsueiafdntcmx.äqühbljß
+      34    31.778    33.9      31.929        33.8   yzröüßbokcwsan.idhetmgxqlu,fpäjv
+      36    31.666    35.9      31.799        36.1   xjokpvfruö.stedhmcni,aßqäbzgwlyü
+      38    31.687    38.0      31.820        38.3   öyokbxlü,cwtsahdrneimgjz.fpßqäuv
+      41    31.572    41.0      31.762        40.9   l.owcyuhdkzraegmi,ntsfjäöbvxüpqß
+      45    31.468    44.4      31.616        44.6   rth.ivwyokzldnu,cmeasfxjpüöbgäqß
+      50    31.498    45.5      31.655        46.1   ldüxpwco,zörtehngmaisfjkäßqbv.uy
+
+written to frontier_dev-at.txt

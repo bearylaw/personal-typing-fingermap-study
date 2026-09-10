@@ -1,0 +1,32 @@
+layout      ms/char   weak%   home%   sciss%   redir%
+-----------------------------------------------------
+QWERTZ       36.101    28.5    24.9     5.72    12.11
+Neo2         35.556    28.7    57.2     0.53     5.11
+Bone         32.534    33.7    54.8     0.49     6.88
+KOY          32.135    38.6    60.7     0.06     3.10
+AdNW         32.064    41.7    60.7     0.10     3.43
+AdNWzjßf     32.060    41.7    60.7     0.06     3.43
+
+Constraint box = AdNW's own comfort figures, with weak-finger load capped
+progressively lower. Time must also come in at or under AdNW's 32.064 ms/char.
+
+ weak cap   ms/char   weak%   home%   sciss%   redir%  feasible   layout
+----------------------------------------------------------------------------------------------------------------------
+       41    31.772    40.8    60.7     0.08     3.44       YES   jßcwfü.öokzrntsmyieahglpdbvu,äqx
+       38    31.848    37.9    60.7     0.08     3.42       YES   jßcwfüöä.ykrntsmuieahglpdbv,xoqz
+       35    31.998    34.6    60.7     0.10     3.44       YES   lvdwfj,oqykrstncuieahgßzmbp.üöäx
+       32    32.159    31.9    60.7     0.08     3.35        no   pqo.yvwmxfzhaeiugtnrsbkäö,üdcljß
+       30    32.501    30.1    60.7     0.12     3.31        no   vßlgfü,zäjqsrntduieahpbxcmwy.oök
+       28    32.957    28.2    60.7     0.12     3.39        no   yöopbwmcqvxhaeiudtnrsküäz,.fgljß
+
+Tightest feasible point: weak load 34.6% (AdNW 41.7%), at 31.998 ms/char (AdNW 32.064).
+ZEHN
+    l v d w f j , o q y k
+     r s t n c u i e a h g
+      ß z m b p . ü ö ä x
+string: lvdwfj,oqykrstncuieahgßzmbp.üöäx
+
+Held-out check on the same layout:
+            ms/char   weak%   home%   sciss%   redir%
+ZEHN         32.066    34.6    60.1     0.11     3.59
+AdNW         32.149    41.3    60.1     0.10     3.67
