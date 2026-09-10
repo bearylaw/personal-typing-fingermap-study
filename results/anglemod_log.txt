@@ -1,0 +1,20 @@
+ISO angle mod, held-out corpus (dev-at/test)
+Left bottom row shifts one key left onto the '<' key; fingers keep their columns.
+
+layout        effortA std     angle    delta   SFB std   angle   mm/1k std     angle
+------------------------------------------------------------------------------------
+ZEHN-C             1678.1    1665.1    -0.8%      1.37    1.37       16562     16163
+ZEHN               1681.1    1673.8    -0.4%      1.31    1.31       16426     16193
+AdNWzjßf           1740.4    1739.6    -0.0%      1.28    1.28       16213     16184
+AdNW               1751.3    1750.5    -0.0%      1.28    1.28       16385     16356
+KOY                1763.2    1762.1    -0.1%      1.31    1.31       16223     16189
+KOU                1826.3    1825.2    -0.1%      1.60    1.60       16225     16191
+VOU                1887.0    1885.9    -0.1%      1.73    1.73       16804     16770
+Bone               1921.5    1920.5    -0.1%      2.38    2.38       18669     18635
+Neo2               2145.9    2142.3    -0.2%      7.56    7.56       17623     17475
+QWERTZ             2707.7    2691.8    -0.6%      8.17    8.17       31292     30842
+
+mean change: +0.23%   helps 10/10 layouts
+
+Note: for QWERTZ this is the cheapest possible ergonomic change -- no new
+letter positions, no driver, just moving four fingers one key to the left.

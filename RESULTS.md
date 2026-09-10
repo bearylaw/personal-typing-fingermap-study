@@ -162,7 +162,7 @@ is what is tabulated.
 
 | corpus | capitals as % of letters |
 |---|---|
-| German, modern (Wikipedia) | **8.82%** |
+| German, modern (Wikipedia) | **8.32%** |
 | German, 19th century (Gutenberg) | 5.18% |
 | English | 2.59% |
 
@@ -195,13 +195,13 @@ against roughly 0.35 for a thumb key.
 Left bottom row shifted one key left onto the `<` key; fingers keep their columns, so the
 letter-to-finger mapping is unchanged and only the geometry improves.
 
-| layout | ms/char standard | angle | change | travel standard | angle |
+| layout | effort standard | angle | change | travel standard | angle |
 |---|---|---|---|---|---|
-| QWERTZ | 2704.5 | 2689.7 | **−0.5%** | 31554 | 31134 |
-| ZEHN-w | 1672.0 | 1657.7 | −0.9% | 16552 | 16112 |
-| Neo2 | 2148.1 | 2144.5 | −0.2% | 17714 | 17564 |
-| AdNW | 1744.9 | 1744.2 | −0.0% | 16326 | 16299 |
-| KOY | 1752.4 | 1751.2 | −0.1% | 16155 | 16117 |
+| QWERTZ | 2707.7 | 2691.8 | **−0.6%** | 31292 | 30842 |
+| ZEHN | 1681.1 | 1673.8 | −0.4% | 16426 | 16193 |
+| Neo2 | 2145.9 | 2142.3 | −0.2% | 17623 | 17475 |
+| AdNW | 1751.3 | 1750.5 | −0.0% | 16385 | 16356 |
+| KOY | 1763.2 | 1762.1 | −0.1% | 16223 | 16189 |
 
 *(Level 2 units — this comparison is about geometry, not about the absolute scale.)*
 
@@ -220,10 +220,10 @@ by ±40%, 200 times, and re-ranking on held-out text:
 
 | layout | wins % | top-2 % | mean rank | worst rank |
 |---|---|---|---|---|
-| ZEHN-w variants | 47–53 | 98–100 | 1.5 | 5 |
-| AdNWzjßf | 0.0 | 1.5 | 3.20 | 4 |
-| AdNW | 0.0 | 0.0 | 4.37 | 6 |
-| KOY | 0.5 | 1.0 | 4.41 | 5 |
+| ZEHN-w variants | 39–61 | 98–100 | 1.4–1.6 | 5 |
+| AdNWzjßf | 0.0 | 1.5 | 3.22 | 4 |
+| AdNW | 0.0 | 0.0 | 4.39 | 6 |
+| KOY | 0.5 | 0.5 | 4.44 | 5 |
 | QWERTZ | 0.0 | 0.0 | 10.00 | 10 |
 
 A layout optimised against a model family still wins **99.5%** of randomly perturbed
@@ -238,20 +238,20 @@ only.
 
 | keys moved | train ms/char | test ms/char | vs QWERTZ | share of full gain | weak % |
 |---|---|---|---|---|---|
-| 2 | 34.515 | 34.595 | −4.2% | 38% | 40.5 |
-| 4 | 33.638 | 33.711 | −6.7% | 59% | 42.0 |
-| 6 | 32.629 | 32.767 | −9.3% | 83% | 45.5 |
-| **8** | 32.203 | 32.249 | **−10.7%** | **95%** | 46.8 |
-| 10 | 31.842 | 31.980 | −11.5% | 102% | 47.0 |
-| 12 | 31.723 | 31.903 | −11.7% | 104% | 47.0 |
-| 16 | 31.598 | 31.692 | −12.3% | 109% | 52.1 |
-| 20 | 31.556 | 31.652 | −12.4% | 110% | 49.2 |
-| 26 | 31.459 | 31.624 | −12.5% | 111% | 52.0 |
-| 30 | 31.453 | 31.601 | −12.5% | 111% | 52.4 |
+| 2 | 34.515 | 34.616 | −4.3% | 38% | 40.6 |
+| 4 | 33.638 | 33.714 | −6.8% | 60% | 42.3 |
+| 6 | 32.629 | 32.767 | −9.4% | 84% | 45.9 |
+| **8** | 32.203 | 32.257 | **−10.8%** | **96%** | 47.2 |
+| 10 | 31.842 | 31.998 | −11.6% | 103% | 47.3 |
+| 12 | 31.723 | 31.928 | −11.8% | 104% | 47.3 |
+| 16 | 31.598 | 31.724 | −12.3% | 109% | 52.4 |
+| 20 | 31.556 | 31.686 | −12.4% | 110% | 49.6 |
+| 26 | 31.459 | 31.654 | −12.5% | 111% | 51.9 |
+| 30 | 31.453 | 31.634 | −12.6% | 111% | 52.3 |
 
 Shares above 100% occur because these are optimised for time alone while ZEHN is
 constrained on four other measures — which is also the caveat: the weak-finger column
-climbs to 47–52%, exactly the trade finding 3 objects to. A partial move worth making would
+climbs to 46–52%, exactly the trade finding 3 objects to. A partial move worth making would
 need the same constraint box applied.
 
 ## Files

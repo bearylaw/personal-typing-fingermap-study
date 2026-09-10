@@ -1,0 +1,47 @@
+==============================================================================
+1. SHIFT DISCIPLINE
+==============================================================================
+
+corpus                    capitals as % of letters
+German (Gutenberg)                           5.18%
+German (Wikipedia)                           8.32%
+English                                      2.59%
+
+layout        German: opp     same   penalty   English: opp     same   penalty
+------------------------------------------------------------------------------
+QWERTZ               2.76     4.95       79%           2.97     5.60       89%
+Neo2                 2.81     5.08       81%           2.64     4.65       76%
+AdNW                 2.92     6.41      120%           2.66     5.27       98%
+KOY                  2.91     6.40      120%           2.62     5.23      100%
+
+On QWERTZ, German text: capitals are 5.2% of letters, and using the
+wrong Shift costs 79% more per capital. Over a whole document
+that is 0.113 effort units per letter typed -- roughly
+4.2% of total typing effort, for free.
+
+==============================================================================
+2. BACKSPACE
+==============================================================================
+
+Backspace is 57 mm from the right pinky's home key -- the longest reach
+on the board. Modelled cost 6.30 effort units.
+A thumb key (e.g. right Alt remapped) costs about 0.35.
+Saving per press: 5.95 units.
+
+  backspace as % of keystrokes   effort saved
+---------------------------------------------
+                          2.0%           4.4%
+                          4.0%           8.8%
+                          5.9%          13.0%
+                          6.5%          14.3%
+                          8.0%          17.6%
+
+(Denominator is ~2.7 effort units per character of text, the QWERTZ average,
+so these are savings relative to the cost of typing the text itself.)
+
+Dhakal et al., 'Observations on Typing from 136 Million Keystrokes' (CHI 2018)
+measured error-correction rates of 5.9% for trained and 6.5% for untrained
+typists, KSPC 1.173, and found Backspace among the three most-pressed keys
+alongside Space and 'e'. At those rates, moving Backspace to a thumb is worth
+more than the entire letter-layout difference between ZEHN and AdNW -- and it
+requires learning exactly one key.

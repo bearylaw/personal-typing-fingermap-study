@@ -225,11 +225,11 @@ German capitalises every noun. Measured on the corpora:
 
 | corpus | capitals as % of letters |
 |---|---|
-| German (modern, Wikipedia) | **8.82%** |
+| German (modern, Wikipedia) | **8.32%** |
 | German (19th-century, Gutenberg) | 5.18% |
 | English | 2.59% |
 
-A German typist shifts **3.4× as often as an English one**. Using the Shift on the same
+A German typist shifts **3.2× as often as an English one**. Using the Shift on the same
 hand as the letter costs **+79% per capital on QWERTZ** and **+120% on AdNW** versus using
 the opposite hand. At modern German capitalisation rates that is roughly **4% of total
 typing effort**, available for free, without changing anything on the keyboard.
@@ -256,7 +256,7 @@ remapping one key beats the entire difference between ZEHN and AdNW.
 ### Also measured, and small: the ISO angle mod
 
 Shifting the left bottom row one key left onto the `<` key straightens the hand and costs
-nothing to learn. It is worth **−0.5% on QWERTZ** and **−0.1% on the optimised layouts** —
+nothing to learn. It is worth **−0.6% on QWERTZ** and **−0.1% or less on the optimised layouts** —
 real, free, and much smaller than its reputation. The reason is visible in the geometry: it
 mainly rescues the `b` key at 34.3 mm, and a good layout already avoids putting a frequent
 letter there.
@@ -267,15 +267,15 @@ letter there.
 
 | keys moved from QWERTZ | ms/char | vs QWERTZ | share of a full relearn |
 |---|---|---|---|
-| 2 | 34.60 | −4.2% | 38% |
-| 4 | 33.71 | −6.7% | 59% |
-| 6 | 32.77 | −9.3% | 83% |
-| **8** | **32.25** | **−10.7%** | **95%** |
-| 12 | 31.90 | −11.7% | 104% |
-| 30 | 31.60 | −12.5% | 111% |
+| 2 | 34.62 | −4.3% | 38% |
+| 4 | 33.71 | −6.8% | 60% |
+| 6 | 32.77 | −9.4% | 84% |
+| **8** | **32.26** | **−10.8%** | **96%** |
+| 12 | 31.93 | −11.8% | 104% |
+| 30 | 31.63 | −12.6% | 111% |
 
 Caveat that matters: these partial layouts were optimised for time only, and they drift up
-to 45–47% weak-finger load — they reproduce exactly the trade that finding 3 criticises. A
+to 46–52% weak-finger load — they reproduce exactly the trade that finding 3 criticises. A
 partial move done properly would need the same constraint box.
 
 ---
