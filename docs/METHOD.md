@@ -56,9 +56,18 @@ Beating QWERTZ proves nothing. The bar throughout is **AdNW and KOY**.
 
 | | TRAIN (search sees this) | TEST (held out) |
 |---|---|---|
-| German | Buddenbrooks, Also sprach Zarathustra, Effi Briest, Werther — 2.26M chars | Faust, Die Verwandlung, Der Tod in Venedig, **+ 432k chars of modern German Wikipedia** — 659k total |
-| English | Pride & Prejudice, Moby Dick, Sherlock Holmes, Frankenstein — 4.92M | A Tale of Two Cities, Alice, Great Expectations, English Wikipedia — 1.50M |
+| German | Buddenbrooks, Also sprach Zarathustra, Effi Briest, Werther — 2.26M chars | Faust, Die Verwandlung, Der Tod in Venedig, **+ 955 kB of modern German Wikipedia** — 1.11M total |
+| English | Pride & Prejudice, Moby Dick, Sherlock Holmes, Frankenstein — 4.92M | A Tale of Two Cities, Alice, Great Expectations, **+ 514 kB of English Wikipedia** — 1.90M |
 | Code | Python standard library, files 1–500 — 3.69M | Python standard library, files 501–900, disjoint — 3.42M |
+
+A note on how those test figures came to be, because it is the kind of thing that is
+usually quietly fixed: the Wikipedia download was still running when the corpus cache was
+first built, so the initial run of the analysis used a German test set with only 432 kB of
+Wikipedia and an English test set with **none at all**, while this document claimed
+otherwise. The training corpora contain no Wikipedia and were unaffected, so no search was
+re-run — but every held-out number was recomputed against the completed corpus. The
+conclusions did not change; the figures moved by 0.1 to 0.8 points. The superseded numbers
+are still in git history.
 
 Default mix `dev-at` = **45% German / 30% English / 25% code**, for someone in Austria
 writing prose in two languages and code in one. Other mixes are in `src/data.py` and the

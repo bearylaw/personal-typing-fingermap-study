@@ -20,17 +20,17 @@ Geometry and corpus counts only.
 
 | layout | travel HOVER<br>mm/char | travel RETURN<br>mm/char | same-finger<br>% of bigrams | forced serial<br>travel mm/char | busiest<br>finger % | weak-finger<br>load % | hand<br>imbalance |
 |---|---|---|---|---|---|---|---|
-| AdNWzjßf | **9.51** | 16.19 | 1.21 | 4.523 | 18.3 | 41.3 | 3.4 |
-| AdNW | 9.60 | 16.36 | **1.21** | 4.566 | 18.3 | 41.3 | 3.4 |
-| **ZEHN** | 9.63 | 16.62 | 1.33 | **4.464** | 18.7 | **34.6** | **0.8** |
-| MECH | 9.64 | 20.77 | **1.14** | **3.604** | **14.8** | 47.3 | 3.3 |
-| KOY | 9.73 | **16.20** | 1.25 | 4.674 | 18.8 | 37.9 | 3.4 |
-| ZEHN-w | 9.73 | 16.40 | 1.27 | 4.587 | 19.5 | 36.9 | 1.3 |
-| KOU | 10.25 | 16.22 | 1.58 | 4.954 | 20.7 | 38.6 | 2.9 |
-| VOU | 10.68 | 16.90 | 1.74 | 5.213 | 20.7 | 37.6 | 4.8 |
-| Bone | 10.70 | 18.66 | 2.35 | 5.566 | 25.8 | 33.5 | 4.4 |
-| Neo2 | 11.16 | 17.68 | 7.38 | 7.801 | 25.4 | 28.7 | 1.9 |
-| QWERTZ | 14.00 | 31.43 | 8.08 | 8.636 | 21.0 | **28.5** | 7.8 |
+| AdNWzjßf | **9.51** | 16.21 | 1.28 | 4.582 | 18.4 | 41.2 | 3.6 |
+| AdNW | 9.60 | 16.38 | **1.28** | 4.626 | 18.4 | 41.2 | 3.6 |
+| **ZEHN** | 9.63 | 16.68 | 1.39 | **4.485** | 18.7 | **34.8** | **1.0** |
+| MECH | 9.64 | 20.89 | **1.19** | **3.628** | **14.7** | 47.3 | 3.1 |
+| KOY | 9.73 | **16.22** | 1.31 | 4.709 | 18.7 | 38.0 | 3.6 |
+| ZEHN-w | 9.73 | 16.43 | 1.31 | 4.624 | 19.5 | 37.1 | 1.4 |
+| KOU | 10.25 | 16.22 | 1.60 | 4.959 | 20.4 | 38.8 | 3.1 |
+| VOU | 10.68 | 16.80 | 1.73 | 5.151 | 20.4 | 37.6 | 4.8 |
+| Bone | 10.70 | 18.67 | 2.38 | 5.635 | 25.9 | 33.4 | 4.5 |
+| Neo2 | 11.16 | 17.62 | 7.56 | 7.815 | 25.3 | 28.7 | 1.7 |
+| QWERTZ | 14.00 | 31.29 | 8.17 | 8.631 | 21.3 | **28.9** | 8.0 |
 
 **HOVER** assumes a finger stays where it last pressed; **RETURN** assumes it goes home
 after every press. The truth is between, so both are reported. QWERTZ is worst under both,
@@ -42,7 +42,7 @@ any layout that respects the comfort constraints.
 
 Note the last two columns together: QWERTZ has the *lowest* weak-finger load of any layout
 here. It achieves that by hammering the index and middle fingers instead — and its hand
-imbalance, 7.8, is by far the worst. Low weak-finger load is not on its own a virtue.
+imbalance, 8.0, is by far the worst. Low weak-finger load is not on its own a virtue.
 
 ## 2. Level 1 — parallel-finger simulator, 36 parameter settings
 
@@ -51,16 +51,17 @@ movement-speed settings.
 
 | layout | best ms/char | worst ms/char | mean rank | ranked 1st |
 |---|---|---|---|---|
-| MECH | 30.54 | 80.31 | 1.50 | 34/36 |
-| AdNWzjßf | 30.68 | 80.33 | 2.47 | 0/36 |
-| AdNW | 30.69 | 80.33 | 3.47 | 0/36 |
-| KOY | 30.70 | 80.34 | 4.31 | 0/36 |
-| ZEHN | 30.68 | 80.35 | 4.31 | 0/36 |
-| KOU | 30.81 | 80.44 | 6.06 | 0/36 |
-| VOU | 30.86 | 80.48 | 7.06 | 0/36 |
-| Bone | 31.00 | 80.65 | 7.72 | 0/36 |
-| Neo2 | 32.59 | 82.06 | 8.61 | 0/36 |
-| QWERTZ | 32.93 | 82.33 | 9.50 | 2/36 |
+| MECH | 30.56 | 80.33 | 1.56 | 34/36 |
+| AdNWzjßf | 30.71 | 80.35 | 2.92 | 0/36 |
+| AdNW | 30.71 | 80.36 | 3.81 | 0/36 |
+| ZEHN-w | 30.70 | 80.36 | 4.53 | 0/36 |
+| KOY | 30.72 | 80.36 | 4.56 | 0/36 |
+| ZEHN | 30.71 | 80.39 | 4.97 | 0/36 |
+| KOU | 30.82 | 80.44 | 7.00 | 0/36 |
+| VOU | 30.85 | 80.48 | 8.00 | 0/36 |
+| Bone | 31.02 | 80.66 | 8.67 | 0/36 |
+| Neo2 | 32.65 | 82.12 | 9.56 | 0/36 |
+| QWERTZ | 32.97 | 82.37 | 10.44 | 2/36 |
 
 QWERTZ ranks first in 2 of 36 — at the slowest sequencing settings, where every layout is
 within a hair of every other and the ordering is effectively arbitrary. That is itself the
@@ -68,9 +69,8 @@ finding in §2 of the README: **at slow typing speeds the layout does not matter
 
 | comparison | across the sweep |
 |---|---|
-| ZEHN vs QWERTZ | 0.0% to **16.8%** faster, mean 5.0% |
-| MECH vs QWERTZ | 0.0% to **19.6%** faster, mean 5.5% |
-| AdNW vs QWERTZ | 0.0% to **16.5%** faster, mean 5.0% |
+| ZEHN vs QWERTZ | 0.0% to **16.9%** faster, mean 5.1% |
+| AdNW vs QWERTZ | 0.0% to **16.4%** faster, mean 5.0% |
 
 ## 3. The decisive experiment — constrained search
 
@@ -97,11 +97,11 @@ below AdNW's ms/char. **The frontier is real and it stops somewhere between 32% 
 
 | | ms/char | weak % | home-row % | scissors % | redirects % |
 |---|---|---|---|---|---|
-| **ZEHN** | **32.066** | **34.6** | 60.1 | 0.11 | 3.59 |
-| AdNW | 32.149 | 41.3 | 60.1 | 0.10 | 3.67 |
-| AdNWzjßf | 32.146 | 41.3 | 60.1 | 0.07 | 3.67 |
-| KOY | 32.212 | 37.9 | 60.1 | 0.07 | 3.33 |
-| QWERTZ | 36.123 | 28.5 | 24.7 | 5.61 | 12.51 |
+| **ZEHN** | **32.102** | **34.8** | 60.1 | 0.11 | 3.65 |
+| AdNW | 32.198 | 41.2 | 60.1 | 0.11 | 3.71 |
+| AdNWzjßf | 32.194 | 41.2 | 60.1 | 0.08 | 3.71 |
+| KOY | 32.250 | 38.0 | 60.1 | 0.08 | 3.40 |
+| QWERTZ | 36.179 | 28.9 | 25.0 | 5.64 | 12.62 |
 
 ## 4. Robustness across workloads
 
@@ -109,23 +109,23 @@ Held-out text, six different corpus mixes. The layout was searched on `dev-at` o
 
 | workload | layout | ms/char | weak % | home % | scissors % | redirects % |
 |---|---|---|---|---|---|---|
-| dev-at | **ZEHN** | 32.066 | **34.6** | 60.1 | 0.11 | 3.59 |
-| | AdNW | 32.149 | 41.3 | 60.1 | 0.10 | 3.67 |
-| pure German | **ZEHN** | 31.876 | **34.7** | 62.3 | 0.12 | 3.81 |
-| | AdNW | 31.969 | 43.2 | 62.3 | 0.09 | 3.70 |
-| pure English | **ZEHN** | 32.075 | **35.2** | 59.7 | 0.04 | 3.01 |
-| | AdNW | 32.050 | 39.9 | 59.7 | 0.08 | 3.73 |
+| dev-at | **ZEHN** | 32.102 | **34.8** | 60.1 | 0.11 | 3.65 |
+| | AdNW | 32.198 | 41.2 | 60.1 | 0.11 | 3.71 |
+| pure German | **ZEHN** | 31.933 | **35.2** | 62.0 | 0.13 | 3.92 |
+| | AdNW | 32.035 | 42.9 | 62.0 | 0.09 | 3.92 |
+| pure English | **ZEHN** | 32.109 | **35.4** | 59.9 | 0.05 | 3.05 |
+| | AdNW | 32.114 | 39.9 | 59.9 | 0.08 | 3.47 |
 | pure code | **ZEHN** | 32.399 | **33.4** | 56.7 | 0.16 | 3.81 |
 | | AdNW | 32.591 | 39.5 | 56.7 | 0.17 | 3.58 |
-| 70% German | **ZEHN** | 31.968 | **34.7** | 61.2 | 0.11 | 3.67 |
-| | AdNW | 32.048 | 42.2 | 61.2 | 0.09 | 3.69 |
-| equal thirds | **ZEHN** | 32.114 | **34.5** | 59.6 | 0.11 | 3.56 |
-| | AdNW | 32.201 | 40.9 | 59.6 | 0.11 | 3.66 |
+| 70% German | **ZEHN** | 32.015 | **35.1** | 61.1 | 0.11 | 3.75 |
+| | AdNW | 32.107 | 42.0 | 61.1 | 0.10 | 3.81 |
+| equal thirds | **ZEHN** | 32.145 | **34.7** | 59.6 | 0.11 | 3.62 |
+| | AdNW | 32.245 | 40.8 | 59.6 | 0.11 | 3.67 |
 
-The weak-finger gap ranges from −4.7 (English) to −8.5 (German) points and never reverses.
+The weak-finger gap ranges from −4.5 (English) to −7.7 (German) points and never reverses.
 
-Over the 36-point physical sweep, **ZEHN minus AdNW ranges from −0.175 to +0.051 ms/char,
-mean −0.011** — ZEHN is nominally faster in 13 of 36 settings and nominally slower in 23,
+Over the 36-point physical sweep, **ZEHN minus AdNW ranges from −0.219 to +0.046 ms/char,
+mean −0.018** — ZEHN is nominally faster in 14 of 36 settings and nominally slower in 22,
 by amounts around 0.1%. **The correct summary is that the speed difference is a wash.**
 
 ## 5. The symbol layer

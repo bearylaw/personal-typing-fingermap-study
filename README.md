@@ -1,12 +1,12 @@
 # A ten-finger system for the German/Austrian keyboard
 
 **Short version:** the well-known German layouts (AdNW, KOY, Neo2) are genuinely much
-better than QWERTZ — 8.1% of QWERTZ bigrams put one finger on two keys in a row, against
-1.2% for AdNW, and QWERTZ moves your fingers 46% further per character. But the two best
+better than QWERTZ — 8.2% of QWERTZ bigrams put one finger on two keys in a row, against
+1.3% for AdNW, and QWERTZ moves your fingers 46% further per character. But the two best
 of them buy their speed by loading **41% of all keystrokes onto the pinkies and ring
-fingers**, against QWERTZ's 28%. That trade is not necessary. A constrained search finds a
+fingers**, against QWERTZ's 29%. That trade is not necessary. A constrained search finds a
 layout that matches AdNW on speed, home-row share, scissors and redirects while carrying
-**34.6%** on those weak fingers.
+**34.8%** on those weak fingers.
 
 It is called **ZEHN**, and it is a 32-character string that loads into an existing driver:
 
@@ -97,13 +97,13 @@ ranking, mean absolute error 0.147 ms/char**.
 
 Millimetres of finger travel per character typed, on held-out text, bracketed two ways
 because how far a hand drifts back toward home is genuinely unknown. QWERTZ moves your
-fingers **14.0 mm per character** if you hover and **31.4 mm** if you return home between
+fingers **14.0 mm per character** if you hover and **31.3 mm** if you return home between
 keys; AdNW needs 9.6 / 16.4.
 
 ![same-finger bigrams](figures/fig3_samefinger.png)
 
-Same-finger bigrams — one finger asked to do two jobs in a row — are **8.08%** on QWERTZ
-and **1.21%** on AdNW, a factor of seven.
+Same-finger bigrams — one finger asked to do two jobs in a row — are **8.17%** on QWERTZ
+and **1.28%** on AdNW, a factor of six.
 
 ### 2. A layout is worth much more the faster you already type
 *(Level 1 — swept)*
@@ -113,7 +113,7 @@ and **1.21%** on AdNW, a factor of seven.
 This is the finding that makes single-number claims about layouts meaningless. At a slow
 sequencing rate the fingers always have time to arrive and the layout barely matters; at
 speed, same-finger collisions become the binding constraint. Across the 36-point sweep,
-ZEHN is between **0.0% and 16.8%** faster than QWERTZ, mean 5.0%.
+ZEHN is between **0.0% and 16.9%** faster than QWERTZ, mean 5.1%.
 
 Anyone quoting "layout X is N% faster" without saying how fast the typist is has hidden the
 most important variable.
@@ -125,11 +125,11 @@ This is the observation the rest of the study is built on.
 
 | layout | weak-finger load | same-finger % | simulated ms/char |
 |---|---|---|---|
-| QWERTZ | **28.5%** | 8.08 | 36.12 |
-| Neo2 | 28.7% | 7.38 | 35.56 |
-| Bone | 33.5% | 2.35 | 32.53 |
-| KOY | 37.9% | 1.25 | 32.21 |
-| AdNW | **41.3%** | 1.21 | 32.15 |
+| QWERTZ | **28.9%** | 8.17 | 36.18 |
+| Neo2 | 28.7% | 7.56 | 35.61 |
+| Bone | 33.4% | 2.38 | 32.58 |
+| KOY | 38.0% | 1.31 | 32.25 |
+| AdNW | **41.2%** | 1.28 | 32.20 |
 
 Weak fingers = both pinkies and both ring fingers. The German optimised layouts are ranked
 almost perfectly by how much load they move onto them. That is not a coincidence: putting
@@ -165,14 +165,14 @@ Confirmed on held-out text:
 
 | | ms/char | weak % | home-row % | scissors % | redirects % |
 |---|---|---|---|---|---|
-| **ZEHN** | **32.066** | **34.6** | 60.1 | 0.11 | 3.59 |
-| AdNW | 32.149 | 41.3 | 60.1 | 0.10 | 3.67 |
+| **ZEHN** | **32.102** | **34.8** | 60.1 | 0.11 | 3.65 |
+| AdNW | 32.198 | 41.2 | 60.1 | 0.11 | 3.71 |
 
 ![finger load](figures/fig5_fingerload.png)
 
 **A caveat visible in that figure.** The aggregate improves, but not every finger does.
-ZEHN puts *more* on the left pinky than AdNW (10.7% vs 6.0%) and much less on the right
-ring (6.9% vs 14.6%). If your problem is specifically a left pinky, this is not the layout
+ZEHN puts *more* on the left pinky than AdNW (11.0% vs 5.8%) and much less on the right
+ring (7.0% vs 14.6%). If your problem is specifically a left pinky, this is not the layout
 for you — take the 38% or 41% row of the frontier table instead, or re-run the search with
 a per-finger cap rather than an aggregate one. The constraint used here was on the sum of
 the four weak fingers, and a sum can improve while a component worsens.
@@ -182,16 +182,16 @@ the four weak fingers, and a sum can improve while a component worsens.
 
 | workload | ZEHN weak % | AdNW weak % | gap | ZEHN ms/char | AdNW ms/char |
 |---|---|---|---|---|---|
-| 45% German / 30% English / 25% code | 34.6 | 41.3 | **−6.7** | 32.066 | 32.149 |
-| pure German | 34.7 | 43.2 | **−8.5** | 31.876 | 31.969 |
-| pure English | 35.2 | 39.9 | **−4.7** | 32.075 | 32.050 |
+| 45% German / 30% English / 25% code | 34.8 | 41.2 | **−6.4** | 32.102 | 32.198 |
+| pure German | 35.2 | 42.9 | **−7.7** | 31.933 | 32.035 |
+| pure English | 35.4 | 39.9 | **−4.5** | 32.109 | 32.114 |
 | pure code | 33.4 | 39.5 | **−6.1** | 32.399 | 32.591 |
-| 70% German | 34.7 | 42.2 | **−7.5** | 31.968 | 32.048 |
-| equal thirds | 34.5 | 40.9 | **−6.4** | 32.114 | 32.201 |
+| 70% German | 35.1 | 42.0 | **−6.9** | 32.015 | 32.107 |
+| equal thirds | 34.7 | 40.8 | **−6.1** | 32.145 | 32.245 |
 
-Across the 36-point physical parameter sweep, ZEHN minus AdNW ranges from **−0.175 to
-+0.051 ms/char**, mean −0.011. That is a wash, and stating it as a wash is the honest
-claim: **ZEHN buys 5–8 points of weak-finger relief at no measurable speed cost.** It is
+Across the 36-point physical parameter sweep, ZEHN minus AdNW ranges from **−0.219 to
++0.046 ms/char**, mean −0.018. That is a wash, and stating it as a wash is the honest
+claim: **ZEHN buys 4.5–8 points of weak-finger relief at no measurable speed cost.** It is
 not a speed improvement and is not offered as one.
 
 ### 6. If you write code, the symbol layer matters more than the letters

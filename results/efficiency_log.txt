@@ -3,17 +3,17 @@ LEVEL 0 -- no tunable parameters. Geometry and corpus counts only.
 ====================================================================================================
 layout        travel HOVER  travel RETURN  same-finger%  forced mm/ch  busiest%   weak%  imbal
 ----------------------------------------------------------------------------------------------
-AdNWzjßf              9.51          16.19          1.21         4.523      18.3    41.3    3.4
-AdNW                  9.60          16.36          1.21         4.566      18.3    41.3    3.4
-ZEHN                  9.63          16.62          1.33         4.464      18.7    34.6    0.8
-MECH                  9.64          20.77          1.14         3.604      14.8    47.3    3.3
-KOY                   9.73          16.20          1.25         4.674      18.8    37.9    3.4
-ZEHN-w                9.73          16.40          1.27         4.587      19.5    36.9    1.3
-KOU                  10.25          16.22          1.58         4.954      20.7    38.6    2.9
-VOU                  10.68          16.90          1.74         5.213      20.7    37.6    4.8
-Bone                 10.70          18.66          2.35         5.566      25.8    33.5    4.4
-Neo2                 11.16          17.68          7.38         7.801      25.4    28.7    1.9
-QWERTZ               14.00          31.43          8.08         8.636      21.0    28.5    7.8
+AdNWzjßf              9.51          16.21          1.28         4.582      18.4    41.2    3.6
+AdNW                  9.60          16.38          1.28         4.626      18.4    41.2    3.6
+ZEHN                  9.63          16.68          1.39         4.485      18.7    34.8    1.0
+MECH                  9.64          20.89          1.19         3.628      14.7    47.3    3.1
+KOY                   9.73          16.22          1.31         4.709      18.7    38.0    3.6
+ZEHN-w                9.73          16.43          1.31         4.624      19.5    37.1    1.4
+KOU                  10.25          16.22          1.60         4.959      20.4    38.8    3.1
+VOU                  10.68          16.80          1.73         5.151      20.4    37.6    4.8
+Bone                 10.70          18.67          2.38         5.635      25.9    33.4    4.5
+Neo2                 11.16          17.62          7.56         7.815      25.3    28.7    1.7
+QWERTZ               14.00          31.29          8.17         8.631      21.3    28.9    8.0
 
 (HOVER and RETURN bracket the truth. A layout that wins under both is)
 (genuinely moving your fingers less, under any assumption about hand drift.)
@@ -23,21 +23,21 @@ LEVEL 1 -- parallel-finger simulator, swept over 36 parameter combinations
 ====================================================================================================
 layout        best ms/ch  worst ms/ch  mean rank  times 1st
 -----------------------------------------------------------
-MECH               30.54        80.31       1.56      34/36
-AdNWzjßf           30.68        80.33       2.75       0/36
-AdNW               30.69        80.33       3.75       0/36
-ZEHN-w             30.68        80.35       4.61       0/36
-KOY                30.70        80.34       4.64       0/36
-ZEHN               30.69        80.37       5.06       0/36
-KOU                30.81        80.44       6.97       0/36
-VOU                30.86        80.48       8.00       0/36
-Bone               31.00        80.65       8.67       0/36
-Neo2               32.59        82.06       9.56       0/36
-QWERTZ             32.93        82.33      10.44       2/36
+MECH               30.56        80.33       1.56      34/36
+AdNWzjßf           30.71        80.35       2.92       0/36
+AdNW               30.71        80.36       3.81       0/36
+ZEHN-w             30.70        80.36       4.53       0/36
+KOY                30.72        80.36       4.56       0/36
+ZEHN               30.71        80.39       4.97       0/36
+KOU                30.82        80.44       7.00       0/36
+VOU                30.85        80.48       8.00       0/36
+Bone               31.02        80.66       8.67       0/36
+Neo2               32.65        82.12       9.56       0/36
+QWERTZ             32.97        82.37      10.44       2/36
 
-ZEHN vs QWERTZ across the sweep: 0.0% to 16.9% faster (mean 5.0%)
+ZEHN vs QWERTZ across the sweep: 0.0% to 16.9% faster (mean 5.1%)
 
-AdNW vs QWERTZ across the sweep: 0.0% to 16.5% faster (mean 5.0%)
+AdNW vs QWERTZ across the sweep: 0.0% to 16.4% faster (mean 5.0%)
 
 Note the size of that range. How much a layout is worth depends strongly on
 how fast you already type: at a slow sequencing rate the fingers always have

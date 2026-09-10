@@ -38,7 +38,8 @@ The code corpus is the Python standard library on the machine running the study 
 excluded. It therefore varies slightly with the Python version; 3.12.10 was used here.
 
 **The Wikipedia portion is a random sample and will differ on every run.** The run
-reported here used 432,494 characters of German and 500k of English. If you want to check
+reported here used 954,753 bytes of German and 513,636 bytes of English Wikipedia, giving
+test corpora of 1,107,173 / 1,901,573 scored characters. If you want to check
 that this does not matter, run the study with `--profile german` against the Gutenberg-only
 German test set; the ranking is unchanged.
 
