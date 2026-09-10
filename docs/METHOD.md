@@ -4,6 +4,12 @@ Everything in this study is reproducible from the code in `src/`. This file reco
 was done and, more importantly, **why each check exists** — most of them exist because an
 earlier version of the analysis was wrong in a way the check would have caught.
 
+**Scope.** The subject is the *finger assignment* — which finger presses which key — on a
+German/Austrian QWERTZ board. The letters never move. Sections 1, 3, 4, 5 and 6 below are
+the shared measurement apparatus; section 10 is the assignment experiment itself. Sections
+2 and 7 concern the layout question and are retained because the apparatus was built and
+validated against it; see [APPENDIX-layout.md](APPENDIX-layout.md).
+
 ---
 
 ## 1. The physical keyboard
@@ -236,3 +242,57 @@ step; the search either finds a layout inside the box or it does not. Nothing is
 off against anything, so the answer cannot be manufactured by choosing a weight.
 
 See [RESULTS.md](../RESULTS.md) for the answer.
+
+
+---
+
+## 10. The finger-assignment experiment
+
+`src/fingersearch.py`.
+
+**Parametrisation.** Fingers are ordered left to right and hands do not cross, so an
+assignment is fully described by where the seven boundaries fall in each row:
+
+```
+LP | LR | LM | LI | RI | RM | RR | RP
+```
+
+Three letter rows, seven cuts each, 21 integers. The number row is not searched — it
+follows the top row shifted one column, because it is staggered 1.5 u to the left, so
+number key *i* sits above top-row key *i−1*. Almost no text drives it in any case, since
+digits are stripped by the corpus normaliser.
+
+**Resting positions follow the assignment.** A discipline that hands the left index three
+home-row keys should not be scored as though the hand were still anchored at `F`. Each
+finger rests on the home-row key it owns that is nearest its anatomical column (`A S D F` /
+`J K L Ö`).
+
+*An earlier version took the median owned key instead, which rested the left index on `G`
+whenever it owned `F` and `G` — something no typist does, and it made the standard
+discipline itself score as physically incredible. The anatomical-column rule replaced it.*
+
+**Credibility filter.** An assignment is rejected if any finger owns no home-row key
+(nowhere to rest) or if any key is more than 58 mm from its finger's resting key.
+
+**Objective.** The parallel-finger simulator, unchanged, with no comfort weights. The
+searches then run in three modes:
+
+1. minimise time alone
+2. minimise time subject to weak-finger load ≤ the standard discipline's
+3. minimise time subject to weak-finger load **and** finger travel ≤ the standard's
+
+Mode 3 is the decisive one. Travel is the parameter-free measure that catches the failure
+mode of modes 1 and 2, which is that a search optimising simulated time will happily send
+fingers on long journeys as long as those journeys hide behind the other hand's work. The
+clock improves; the hand still moves.
+
+**Single-key tests.** `src/keytweaks.py` moves exactly one key to an adjacent finger,
+holding everything else fixed including the resting keys, and scores each on held-out text.
+This asks the narrower question the whole-assignment search leaves open.
+
+### What would falsify the conclusion
+
+The claim is that the standard German assignment cannot be beaten on simulated time without
+spending more finger travel or more weak-finger load. It is falsified by any assignment
+that comes in strictly under all three of the standard's numbers. `fingersearch.py` prints
+exactly that comparison and its verdict line.

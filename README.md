@@ -1,28 +1,35 @@
-# A ten-finger system for the German/Austrian keyboard
+# Which finger should press which key
 
-**Short version:** the well-known German layouts (AdNW, KOY, Neo2) are genuinely much
-better than QWERTZ — 8.2% of QWERTZ bigrams put one finger on two keys in a row, against
-1.3% for AdNW, and QWERTZ moves your fingers 46% further per character. But the two best
-of them buy their speed by loading **41% of all keystrokes onto the pinkies and ring
-fingers**, against QWERTZ's 29%. That trade is not necessary. A constrained search finds a
-layout that matches AdNW on speed, home-row share, scissors and redirects while carrying
-**34.8%** on those weak fingers.
+A measurement study of the **ten-finger typing discipline** for a German/Austrian
+QWERTZ keyboard (ISO 105-key, T1). Not a new layout — the letters stay exactly where they
+are on the board you already own. The only question is which finger should press each key,
+and whether the assignment everyone is taught is actually the efficient one.
 
-It is called **ZEHN**, and it is a 32-character string that loads into an existing driver:
+**The answer is that it is.** A search over the whole space of physically credible finger
+assignments cannot beat the standard German discipline without making your fingers travel
+further. There are four habit-level changes worth making, and the biggest of them has
+nothing to do with the letters.
 
-```
-   l  v  d  w  f     j  ,  o  q  y  k
-    r  s  t  n  c     u  i  e  a  h  g
-     ß  z  m  b  p     .  ü  ö  ä  x
+---
 
-   lvdwfj,oqykrstncuieahgßzmbp.üöäx
-```
+## The map
 
-**Longer version, and the part that matters more:** for anyone who writes code, the letters
-are the *small* half of the problem. Fixing the symbol layer is worth **−39%** on symbol
-keystrokes, moving Backspace to a thumb is worth more than the entire letter layout, and
-German's capitalisation makes Shift discipline worth about 4% of everything — none of
-which requires learning a new alphabet.
+![which finger presses which key](figures/qwertz_fingermap.png)
+
+Fingers rest on **A S D F** and **J K L Ö**. Every finger returns there after every
+keystroke. Thumbs cover Space; the right thumb also takes AltGr.
+
+| finger | rests on | also presses |
+|---|---|---|
+| **left pinky** | `A` | `^` `1` `Q` `<` `Y` — and Tab, Caps, left Shift, left Ctrl |
+| **left ring** | `S` | `2` `W` `X` |
+| **left middle** | `D` | `3` `E` `C` |
+| **left index** | `F` | `4` `5` `R` `T` `G` `V` `B` |
+| **right index** | `J` | `6` `7` `Z` `U` `H` `N` `M` |
+| **right middle** | `K` | `8` `I` `,` |
+| **right ring** | `L` | `9` `O` `.` |
+| **right pinky** | `Ö` | `0` `ß` `´` `P` `Ü` `+` `Ä` `#` `-` — and Enter, Backspace, right Shift |
+| **thumbs** | Space | right thumb: AltGr |
 
 ---
 
@@ -30,346 +37,265 @@ which requires learning a new alphabet.
 
 | | |
 |---|---|
-| [The problem with layout studies](#the-problem-with-layout-studies) | why most of these numbers are circular, and what was done about it |
-| [Findings](#findings) | the eight results, with what each one rests on |
-| [The layout](#the-layout) | ZEHN, and how to install it |
-| [Honest limitations](#honest-limitations) | what this does not show |
-| [docs/METHOD.md](docs/METHOD.md) | full methodology |
-| [docs/INSTALL.md](docs/INSTALL.md) | how to actually run ZEHN on Windows |
-| [docs/REPRODUCE.md](docs/REPRODUCE.md) | every command, and what would falsify the finding |
+| [Is the standard assignment right?](#1-is-the-standard-assignment-right) | the main experiment |
+| [What it costs you](#2-what-the-standard-assignment-costs-you) | the load distribution nobody mentions |
+| [Four changes worth making](#3-four-changes-worth-making) | ranked by measured benefit |
+| [The reach table](#4-the-reach-table) | why some keys feel worse than others |
+| [docs/METHOD.md](docs/METHOD.md) | how any of this was measured |
+| [docs/REPRODUCE.md](docs/REPRODUCE.md) | every command, and what would falsify it |
 | [RESULTS.md](RESULTS.md) | all the tables |
 
 ---
 
-## The problem with layout studies
+## How this was tested
 
-Any optimiser will produce a layout that beats every existing layout **on the optimiser's
-own scoring function**. That is a tautology, not a discovery, and most published layout
-comparisons are exactly that.
+Claims about typing efficiency are usually circular: someone invents a cost model, then
+reports that their preferred technique scores well on it. So the core measurement here has
+no comfort weights in it at all.
 
-This study started that way and got a useful lesson out of it. The first search used a
-conventional weighted-effort model — pinky costs 1.75 of an index finger, a same-finger
-bigram costs 4.0, a scissor 2.2 — and produced a layout scoring **4.7% better than the
-best published layout**. Then the untuned measures came in:
-
-| | its own objective | same-finger % | finger travel | independent time model |
-|---|---|---|---|---|
-| the new layout vs AdNW | **−4.7%** | 1.61 vs 1.17 — **worse** | +1.2% — **worse** | +0.1% — a tie |
-
-It won on the thing it was optimised for and on nothing else. Those weights were my
-opinion wearing a lab coat.
-
-So the whole apparatus was rebuilt to report results at **three separate levels of
-assumption**, and every finding below is labelled with the level it rests on.
-
-**Level 0 — no tunable parameters at all.** Geometry and corpus counts. How far the
-fingers actually move; how often one finger is asked to do two jobs in a row; how the work
-is spread. Nothing here can be tuned.
-
-**Level 1 — three physical constants, swept rather than chosen.** A simulator in which ten
-fingers are independent actuators that move **concurrently**: while the right index types,
-the left middle is already travelling. A keystroke is delayed only when the finger it needs
-is still busy.
+**A parallel-finger simulator.** Ten fingers are independent actuators that move
+**concurrently** — while your right index is typing, your left middle is already on its way
+to its next key. A keystroke is delayed only when the finger it needs is still busy or
+still travelling:
 
 ```
 press[i] = max( press[i-1] + GAP,  free[finger] + travel_time(from, to) )
+free[f]  = press[i] + DWELL
+travel_time(d) = T_MOVE + SPEED * sqrt(d)     # ballistic: accelerate, then decelerate
 ```
 
-Everything the weighted models put in by hand falls out of this instead — same-finger
-bigrams are slow because one actuator must do two jobs in series; alternating hands is fast
-because the travel hides behind the other hand. Rather than pick values for the three
-constants, the analysis **sweeps 36 combinations** and reports whether the ranking changes.
+Everything the usual scoring models put in by hand falls out of this instead. A finger
+asked to do two jobs in a row is slow because one actuator must do them in series.
+Alternating hands is fast because the travel hides behind the other hand's work. A long
+reach is free when the finger had idle time to prepare and expensive when it did not.
 
-**Level 2 — the weighted model.** Kept for comparison, relied on for nothing.
+Three parameters, all physical, all in units of time. Rather than choose values, the
+analysis sweeps 36 combinations and checks whether the ranking ever changes.
 
-The simulator's behaviour was also solved in closed form so it could be optimised against.
-The closed form tracks the sequential simulator with **correlation 1.0000, identical
-ranking, mean absolute error 0.147 ms/char**.
+Alongside it, two measures with **no parameters at all**: how many millimetres your fingers
+actually travel per character, and how the keystrokes are distributed across the eight
+fingers. Neither can be tuned to favour anything.
+
+Geometry is the real ISO board in millimetres — 19.05 mm pitch, with the true row stagger
+(Tab 1.5u, Caps 1.75u, LShift 1.25u), so the awkwardness of `B` and `Z` is measured rather
+than asserted. Text is 1.1M characters of held-out German, 1.9M of English and 3.4M of
+Python, none of which the search saw.
 
 ---
 
-## Findings
+## 1. Is the standard assignment right?
 
-### 1. QWERTZ is as bad as its reputation, and the German alternatives are as good as theirs
-*(Level 0 — no parameters)*
+An assignment is fully described by where the boundaries between fingers fall in each row,
+since fingers are ordered left-to-right and hands do not cross:
 
-![finger travel by layout](figures/fig2_travel.png)
+```
+LP | LR | LM | LI | RI | RM | RR | RP        7 boundaries per row, 3 letter rows
+```
 
-Millimetres of finger travel per character typed, on held-out text, bracketed two ways
-because how far a hand drifts back toward home is genuinely unknown. QWERTZ moves your
-fingers **14.0 mm per character** if you hover and **31.3 mm** if you return home between
-keys; AdNW needs 9.6 / 16.4.
+That is a 21-integer search space, small enough to search thoroughly. Resting positions
+follow the assignment rather than being pinned to ASDF/JKLÖ: each finger rests on the
+home-row key it owns that is nearest its anatomical column.
 
-![same-finger bigrams](figures/fig3_samefinger.png)
+**Optimising for speed alone finds a 3.2% improvement — and it is not real:**
 
-Same-finger bigrams — one finger asked to do two jobs in a row — are **8.17%** on QWERTZ
-and **1.28%** on AdNW, a factor of six.
-
-### 2. A layout is worth much more the faster you already type
-*(Level 1 — swept)*
-
-![speed dependence](figures/fig4_speed_dependence.png)
-
-This is the finding that makes single-number claims about layouts meaningless. At a slow
-sequencing rate the fingers always have time to arrive and the layout barely matters; at
-speed, same-finger collisions become the binding constraint. Across the 36-point sweep,
-ZEHN is between **0.0% and 16.9%** faster than QWERTZ, mean 5.1%.
-
-Anyone quoting "layout X is N% faster" without saying how fast the typist is has hidden the
-most important variable.
-
-### 3. AdNW and KOY are fast because they overwork the weak fingers
-*(Level 0 — no parameters)*
-
-This is the observation the rest of the study is built on.
-
-| layout | weak-finger load | same-finger % | simulated ms/char |
+| | simulated time | finger travel | weak-finger load |
 |---|---|---|---|
-| QWERTZ | **28.9%** | 8.17 | 36.18 |
-| Neo2 | 28.7% | 7.56 | 35.61 |
-| Bone | 33.4% | 2.38 | 32.58 |
-| KOY | 38.0% | 1.31 | 32.25 |
-| AdNW | **41.2%** | 1.28 | 32.20 |
+| standard German discipline | 48.594 ms/char | **31.29 mm/char** | **28.9%** |
+| best assignment, speed only | **47.026 ms/char** (−3.2%) | 43.12 mm/char (**+38%**) | 53.6% |
+| best, with load capped at standard's | 47.456 ms/char (−2.3%) | 41.32 mm/char (**+32%**) | 27.9% |
 
-Weak fingers = both pinkies and both ring fingers. The German optimised layouts are ranked
-almost perfectly by how much load they move onto them. That is not a coincidence: putting
-letters on the pinky columns is *how* you get same-finger collisions down, because it
-spreads the alphabet across more fingers.
+It buys its time by sending fingers on longer journeys that happen to be hidden behind the
+other hand's work. Your fingers move a third further; the simulated clock is slightly
+faster. That is not a technique anyone should adopt.
 
-### 4. That trade is not necessary
-*(Level 1 — the decisive experiment)*
+**So the decisive test is whether anything beats the standard on time while spending no more
+travel and no more load on the weak fingers.** Caps are set to the standard discipline's own
+values, so nothing is traded against anything:
 
-![the frontier](figures/fig1_frontier.png)
+| | simulated time | finger travel | weak-finger load |
+|---|---|---|---|
+| standard | 48.594 ms/char | 31.29 mm/char | 28.9% |
+| best found inside the box | 47.925 ms/char | 31.64 mm/char — **over the cap** | 28.9% |
 
-The question was made precise and falsifiable: **is there a layout that matches AdNW on
-every awkwardness measure and on simulated time, while carrying far less weak-finger
-load?**
+**No improvement.** The best candidate is 1.4% faster and spends 1.1% more travel; it sits
+just outside the box rather than inside it. The standard German ten-finger assignment is on
+the efficiency frontier for the keys as they actually sit.
 
-The constraint box is set to **AdNW's own figures** — not to weights I chose — and the
-weak-finger cap is tightened step by step. The search either finds a layout inside the box
-or it does not:
+That is a boring answer and it is the one the measurements give. It also means the useful
+question is not *which assignment* but *which individual keys* — and there the answer is
+almost as short. Of eleven single-key reassignments tested, exactly one improves anything:
 
-| weak-finger cap | ms/char | weak % | home-row % | scissors % | redirects % | inside the box? |
-|---|---|---|---|---|---|---|
-| 41% | 31.772 | 40.8 | 60.7 | 0.08 | 3.44 | **yes** |
-| 38% | 31.848 | 37.9 | 60.7 | 0.08 | 3.42 | **yes** |
-| **35%** | **31.998** | **34.6** | **60.7** | **0.10** | **3.44** | **yes** |
-| 32% | 32.159 | 31.9 | 60.7 | 0.08 | 3.35 | no — too slow |
-| 30% | 32.501 | 30.1 | 60.7 | 0.12 | 3.31 | no |
-| 28% | 32.957 | 28.2 | 60.7 | 0.12 | 3.39 | no |
+| key | from | to | reach now | reach after | Δ time | Δ travel | verdict |
+|---|---|---|---|---|---|---|---|
+| `Y` | left pinky | left ring | 21.3 mm | 21.3 mm | −0.006 | ±0.00 | **keep** |
+| `Z` | right index | left index | 30.5 mm | 38.4 mm | −0.034 | +0.09 | no |
+| `6` | right index | left index | 50.6 mm | 44.9 mm | ±0.000 | ±0.00 | geometry only |
+| `B` | left index | right index | 34.3 mm | 34.3 mm | +0.045 | ±0.00 | no |
+| `M` | right index | right middle | 21.3 mm | 21.3 mm | +0.107 | ±0.00 | no |
+| `H` | right index | right middle | 19.0 mm | 38.1 mm | +0.139 | +1.66 | no |
+| `G` | left index | left middle | 19.0 mm | 38.1 mm | +0.262 | +0.89 | no |
+| `T` | left index | left middle | 23.8 mm | 38.4 mm | +0.475 | +2.13 | no |
 
-So the answer is yes down to about 35%, and no below 32%. That bound is a real one, not an
-artefact of where I stopped looking.
+The inward stretches everyone complains about — `G`, `H`, `T`, `B` — are all correctly
+assigned. Handing them to the neighbouring finger makes things worse, because that finger
+would have to cross the board to reach them.
 
-Confirmed on held-out text:
+## 2. What the standard assignment costs you
 
-| | ms/char | weak % | home-row % | scissors % | redirects % |
-|---|---|---|---|---|---|
-| **ZEHN** | **32.102** | **34.8** | 60.1 | 0.11 | 3.65 |
-| AdNW | 32.198 | 41.2 | 60.1 | 0.11 | 3.71 |
+![finger load](figures/qwertz_fingerload.png)
 
-![finger load](figures/fig5_fingerload.png)
+The assignment is efficient; the *distribution* is wildly uneven, and that is a property of
+QWERTZ rather than of the discipline.
 
-**A caveat visible in that figure.** The aggregate improves, but not every finger does.
-ZEHN puts *more* on the left pinky than AdNW (11.0% vs 5.8%) and much less on the right
-ring (7.0% vs 14.6%). If your problem is specifically a left pinky, this is not the layout
-for you — take the 38% or 41% row of the frontier table instead, or re-run the search with
-a per-finger cap rather than an aggregate one. The constraint used here was on the sum of
-the four weak fingers, and a sum can improve while a component worsens.
+**Your right pinky does one eighth of the work your left index does.** Its keys are
+`P Ü Ö Ä # -` — all rare in German and English. Meanwhile the left middle and index fingers
+carry 21% each, more than one keystroke in five.
 
-### 5. The result holds across every workload tested
-*(Level 1 — held-out text only)*
+This is worth knowing for two reasons. It is the strongest argument for eventually changing
+layout rather than technique — no finger assignment can fix a letter distribution. And it
+means that if something starts to hurt, the left hand is the more likely culprit, despite
+the right pinky owning the longest reaches on the board.
 
-| workload | ZEHN weak % | AdNW weak % | gap | ZEHN ms/char | AdNW ms/char |
-|---|---|---|---|---|---|
-| 45% German / 30% English / 25% code | 34.8 | 41.2 | **−6.4** | 32.102 | 32.198 |
-| pure German | 35.2 | 42.9 | **−7.7** | 31.933 | 32.035 |
-| pure English | 35.4 | 39.9 | **−4.5** | 32.109 | 32.114 |
-| pure code | 33.4 | 39.5 | **−6.1** | 32.399 | 32.591 |
-| 70% German | 35.1 | 42.0 | **−6.9** | 32.015 | 32.107 |
-| equal thirds | 34.7 | 40.8 | **−6.1** | 32.145 | 32.245 |
+## 3. Four changes worth making
 
-Across the 36-point physical parameter sweep, ZEHN minus AdNW ranges from **−0.219 to
-+0.046 ms/char**, mean −0.018. That is a wash, and stating it as a wash is the honest
-claim: **ZEHN buys 4.5–8 points of weak-finger relief at no measurable speed cost.** It is
-not a speed improvement and is not offered as one.
+Ranked by measured benefit. None of them moves a letter.
 
-### 6. If you write code, the symbol layer matters more than the letters
-*(Level 2 — weighted, but the gap is far larger than the weights)*
+### 3.1 Use the opposite hand's Shift — every time
 
-On a German keyboard the characters a programmer types constantly are the worst-placed
-characters on the board. Measured over **1,526,672 symbol keystrokes** from the Python
-standard library:
-
-| char | share of symbol keystrokes | QWERTZ | cost | Neo layer 3 | cost |
-|---|---|---|---|---|---|
-| `_` | 11.7% | Shift + `-` | 4.63 | Mod3 + `w` | 3.27 |
-| `'` | 9.9% | Shift + `#` | 5.03 | Mod3 + `.` | 3.53 |
-| `"` | 9.1% | Shift + `2` | 5.04 | Mod3 + `,` | 3.05 |
-| `)` | 8.1% | Shift + `9` | 5.04 | Mod3 + `k` | 1.95 |
-| `(` | 8.1% | Shift + `8` | 4.38 | Mod3 + `j` | 1.90 |
-| `=` | 5.2% | Shift + `0` | 5.91 | Mod3 + `o` | 3.27 |
-| `\` | 2.1% | **AltGr + `ß`** | 6.59 | Mod3 + `a` | 2.65 |
-| `}` | 0.4% | **AltGr + `0`** | 6.26 | Mod3 + `f` | 1.90 |
-| | **mean** | | **3.77** | | **2.29** |
-
-**−39.2%**, and it requires learning no new letter positions at all. `(` and `)` land on
-the right index and middle home keys instead of Shift+8 and Shift+9.
-
-If you take one thing from this repository, take this one.
-
-### 7. German makes Shift discipline worth about 4% of everything
-*(Level 0 for the counts, Level 2 for the cost)*
-
-German capitalises every noun. Measured on the corpora:
+The largest single habit change available, and it matters far more in German than in
+English because German capitalises every noun.
 
 | corpus | capitals as % of letters |
 |---|---|
-| German (modern, Wikipedia) | **8.32%** |
-| German (19th-century, Gutenberg) | 5.18% |
+| German, modern (Wikipedia) | **8.32%** |
+| German, 19th century | 5.18% |
 | English | 2.59% |
 
-A German typist shifts **3.2× as often as an English one**. Using the Shift on the same
-hand as the letter costs **+79% per capital on QWERTZ** and **+120% on AdNW** versus using
-the opposite hand. At modern German capitalisation rates that is roughly **4% of total
-typing effort**, available for free, without changing anything on the keyboard.
+You shift **3.2× as often as an English typist.** And the cost of getting it wrong is large:
 
-### 8. Backspace is worth more than the entire letter layout
-*(Level 0 geometry, external frequency)*
+| | opposite-hand Shift | same-hand Shift | penalty |
+|---|---|---|---|
+| cost per capital, QWERTZ | 2.76 | 4.95 | **+79%** |
 
-Backspace sits **57 mm** from the right pinky's home key — the longest reach on the board —
-and it is one of the three most-pressed keys on any keyboard. A thumb key costs almost
-nothing.
+At German capitalisation rates that is roughly **4% of total typing effort**, for free. If
+you press `Shift+A` with your left hand you are pinning the pinky of the hand that then has
+to reach. Capital `A` takes the **right** Shift; capital `Ö` takes the **left**.
 
-| backspace as % of keystrokes | effort saved by moving it to a thumb |
+### 3.2 Put AltGr on your right thumb, not your pinky
+
+AltGr sits right of the space bar and is a **thumb** key. Reaching it with the right pinky,
+or twisting the wrist to get there, is the most common bad habit on a German keyboard and
+it makes `{ } [ ] \ @ ~ |` — the characters a programmer types constantly — far worse than
+they need to be.
+
+For the same reason, `AltGr + 7/8/9/0` for `{ [ ] }` is genuinely awkward even done
+correctly: the thumb anchors the right hand while that same hand reaches the number row. If
+you write code, the fix is a symbol layer rather than better technique — see
+[RESULTS.md §4](RESULTS.md#4-the-symbol-layer), which measures **−39%** on 1.53M symbol
+keystrokes from real code.
+
+### 3.3 The ISO angle mod — the one free assignment change
+
+Your board has an extra key left of `Y` that standard technique wastes on nothing. Shifting
+the whole left bottom row one position left onto it — pinky takes `<`, ring takes `Y`,
+middle takes `X`, index takes `C` and `V` — straightens the left hand's angle.
+
+| | standard | angle mod | change |
+|---|---|---|---|
+| QWERTZ effort | 2707.7 | 2691.8 | **−0.6%** |
+| finger travel | 31292 | 30842 | −1.4% |
+
+It is genuinely free — no letters move, no driver, the key is already there — and it is
+genuinely small. It is worth more on QWERTZ than on any optimised layout, because it mainly
+rescues `B` at 34.3 mm, and a good layout would not have put a common letter there.
+
+Note the single-key table above found `Y` → left ring as the one beneficial change; the
+angle mod is that change plus the geometry gain from moving the whole row.
+
+### 3.4 Stop reaching for Backspace with your pinky
+
+Backspace is **57 mm** from the right pinky's resting key — the longest reach on the entire
+board — and it is one of the three most-pressed keys on any keyboard.
+
+| Backspace as % of your keystrokes | effort saved by moving it to a thumb key |
 |---|---|
-| 2.0% | 4.4% |
-| 4.0% | 8.8% |
+| 2% | 4.4% |
 | **5.9%** (trained typists) | **13.0%** |
 | **6.5%** (untrained) | **14.3%** |
-| 8.0% | 17.6% |
+| 8% | 17.6% |
 
 The 5.9% / 6.5% figures are from Dhakal et al., *Observations on Typing from 136 Million
-Keystrokes* (CHI 2018) — the one number in this study taken from outside. At those rates,
-remapping one key beats the entire difference between ZEHN and AdNW.
+Keystrokes* (CHI 2018), which also found Backspace among the three most-pressed keys
+alongside Space and `e`. It is the one number in this study taken from outside.
 
-### Also measured, and small: the ISO angle mod
+Remapping one key beats every other finding here combined.
 
-Shifting the left bottom row one key left onto the `<` key straightens the hand and costs
-nothing to learn. It is worth **−0.6% on QWERTZ** and **−0.1% or less on the optimised layouts** —
-real, free, and much smaller than its reputation. The reason is visible in the geometry: it
-mainly rescues the `b` key at 34.3 mm, and a good layout already avoids putting a frequent
-letter there.
+## 4. The reach table
 
-### And: you get most of the benefit from moving eight keys
+Distance from each finger's resting key, in millimetres. Pure geometry — this is why some
+of the standard assignment feels worse than the rest.
 
-*(Level 1, unconstrained on finger load — see the caveat)*
-
-| keys moved from QWERTZ | ms/char | vs QWERTZ | share of a full relearn |
-|---|---|---|---|
-| 2 | 34.62 | −4.3% | 38% |
-| 4 | 33.71 | −6.8% | 60% |
-| 6 | 32.77 | −9.4% | 84% |
-| **8** | **32.26** | **−10.8%** | **96%** |
-| 12 | 31.93 | −11.8% | 104% |
-| 30 | 31.63 | −12.6% | 111% |
-
-Caveat that matters: these partial layouts were optimised for time only, and they drift up
-to 46–52% weak-finger load — they reproduce exactly the trade that finding 3 criticises. A
-partial move done properly would need the same constraint box.
-
----
-
-## The layout
-
-```
-   l  v  d  w  f     j  ,  o  q  y  k
-    r  s  t  n  c     u  i  e  a  h  g
-     ß  z  m  b  p     .  ü  ö  ä  x
-```
-
-![key usage](figures/fig6_keyboards.png)
-
-### Installing it
-
-No driver needs writing. ZEHN is expressed in exactly the format
-[neo2-llkh](https://github.com/MaxGyver83/neo2-llkh) accepts. Put this `settings.ini` next
-to `neo-llkh.exe`:
-
-```ini
-[Settings]
-customLayout=lvdwfj,oqykrstncuieahgßzmbp.üöäx
-symmetricalLevel3Modifiers=1
-qwertzForShortcuts=1
-capsLockEnabled=0
-```
-
-| setting | why |
+| finger | keys and reach (mm) |
 |---|---|
-| `symmetricalLevel3Modifiers=1` | Mod3 on **both** CapsLock and `ä`, so every symbol is reachable with the opposite hand. This is what makes finding 6 work. |
-| `qwertzForShortcuts=1` | Ctrl+Z/X/C/V/A/S stay on their QWERTZ keys. This removes any reason to constrain the layout for shortcut compatibility — an earlier version of this study wasted a constrained search on that problem before finding this flag. |
-| `capsLockEnabled=0` | CapsLock becomes Mod3. You will not miss it. |
+| left pinky (rests `A`) | `q`=20 `a`=0 `<`=21 `y`=21 `1`=41 `^`=**51** |
+| left ring (rests `S`) | `w`=20 `s`=0 `x`=21 `2`=41 |
+| left middle (rests `D`) | `e`=20 `d`=0 `c`=21 `3`=41 |
+| left index (rests `F`) | `r`=20 `t`=24 `f`=0 `g`=19 `v`=21 `b`=**34** `4`=41 `5`=38 |
+| right index (rests `J`) | `z`=**31** `u`=20 `h`=19 `j`=0 `n`=21 `m`=21 `6`=**51** `7`=41 |
+| right middle (rests `K`) | `i`=20 `k`=0 `,`=21 `8`=41 |
+| right ring (rests `L`) | `o`=20 `l`=0 `.`=21 `9`=41 |
+| right pinky (rests `Ö`) | `p`=20 `ü`=24 `+`=38 `ö`=0 `ä`=19 `#`=38 `-`=21 `0`=41 `ß`=38 `´`=45 |
 
-### The symbol layer
+**Worst keys on the board, worst first:** `^` and `6` at 50.6 mm, `´` at 44.9 mm, the number
+row generally at 38–41 mm, then `ß` `+` `#` at 38 mm, `B` at 34.3 mm and `Z` at 30.5 mm.
 
-Hold Mod3 (CapsLock or `ä`) — use the hand *opposite* the symbol:
-
-```
-   …  _  [  ]  ^     !  <  >  =  &  ſ
-    \  /  {  }  *     ?  (  )  -  :  @
-     #  $  |  ~  `     +  %  "  '  ;
-```
-
-### If you are not going to relearn 32 keys
-
-Entirely defensible. In order of benefit per hour invested:
-
-1. **Neo layer 3 on QWERTZ.** Run neo2-llkh with `layout=qwertz` and
-   `symmetricalLevel3Modifiers=1`. Letters do not move; you get finding 6 for free.
-2. **Move Backspace to a thumb key.** One key, finding 8.
-3. **Use the opposite-hand Shift, always.** Zero keys, finding 7, and it matters more in
-   German than anywhere else.
-4. **AdNW or KOY** if you do want a new alphabet — they are within noise of ZEHN on
-   everything except weak-finger load, and they have a community, tutorials and a decade of
-   real use behind them. ZEHN has none of that.
+One genuinely debatable case: **`6`**. Standard German teaching gives it to the right index
+at 50.6 mm, but it is 44.9 mm from the left index. The geometry favours moving it — but the
+left index already carries 21.3% of keystrokes against the right index's 18.9%, and digits
+are stripped from the text corpora, so this is a geometry argument with no measured effect
+behind it. Take it or leave it.
 
 ---
 
 ## Honest limitations
 
-- **No human ever typed on ZEHN.** Every number here is a model. The models are calibrated
-  to reproduce the known ordering of existing layouts before being used to design one, and
-  the parameter-free measures cannot be tuned — but a simulation is not an experiment.
-- **The weak-finger claim rests on a physiological premise the study cannot test.** That
-  pinkies and ring fingers should carry less work than index and middle fingers is
-  standard ergonomic advice, not something geometry can prove. If that premise is wrong,
-  AdNW is simply better and this whole result dissolves. It is stated as a premise for
-  exactly that reason.
-- **The speed difference is a wash and is reported as one.** ZEHN is not faster than AdNW.
-- **`-` is excluded from scoring** because QWERTZ has it in the main block and the Neo
-  family has it on layer 3. This mildly favours the Neo family.
-- **The Wikipedia portion of the test corpus is a random sample** and will differ if you
-  re-run the fetch. The Gutenberg portion is byte-reproducible by ID.
-- **Switching costs are real and are not modelled.** Three to six weeks at reduced speed,
-  and every other keyboard you touch becomes hostile.
+- **Nobody was timed.** Every number is a simulation. The simulator is checked against
+  itself — a closed-form solution tracks the sequential version at correlation 1.0000 with
+  identical ranking — and the parameter-free measures cannot be tuned. But a model is not
+  an experiment.
+- **The main result is a null result**, and null results are weaker than they look. The
+  search covers assignments where fingers are ordered left-to-right and hands do not cross.
+  A genuinely exotic discipline is outside that space by construction.
+- **The decisive test is close.** The best boxed candidate misses the travel cap by 1.1%,
+  not by a mile. Read the conclusion as "the standard assignment sits on the frontier", not
+  as "nothing else could possibly work".
+- **Load distribution is a property of QWERTZ, not of the technique**, and no finger
+  assignment can fix it.
+- **Digits are stripped from the corpora**, so number-row assignments rest on geometry
+  alone.
+
+## Appendix
+
+A separate question — whether a *different layout* would beat QWERTZ — was investigated with
+the same machinery before the goal was clarified, and is kept in
+[docs/APPENDIX-layout.md](docs/APPENDIX-layout.md) with its tables in
+[RESULTS-layout.md](RESULTS-layout.md). It is not the subject of this study.
 
 ## Reproducing
 
-Everything is in [`src/`](src/); see [docs/REPRODUCE.md](docs/REPRODUCE.md) for the exact
-commands, the corpus manifest, and what result would falsify the main finding. Python 3.12,
-numpy, matplotlib, about 45 minutes on one core.
+Python 3.12, numpy, matplotlib. See [docs/REPRODUCE.md](docs/REPRODUCE.md).
 
 ```bash
 cd src
 python fetch_corpus.py && python fetch_wiki.py
-python verify.py          # must print ALL CHECKS PASSED before anything else means anything
-python simfast.py         # must print correlation 1.0000
-python efficiency.py dev-at
-python final_search.py dev-at 5
-python robustness.py
+python verify.py            # must print ALL CHECKS PASSED
+python simfast.py           # must print correlation 1.0000
+python fingersearch.py      # the main experiment
+python keytweaks.py         # single-key changes
+python fingermap.py         # the map and the reach table
 ```
 
 ## Licence
 
-MIT. The corpora are not redistributed: Project Gutenberg texts are fetched by ID, and the
-Wikipedia sample is CC BY-SA and fetched from the API.
+MIT. Corpora are not redistributed — Project Gutenberg texts are fetched by ID and the
+Wikipedia sample from the API.

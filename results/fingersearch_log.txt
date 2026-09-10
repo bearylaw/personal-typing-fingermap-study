@@ -1,0 +1,52 @@
+==============================================================================
+WHICH FINGER SHOULD PRESS WHICH KEY  —  QWERTZ letters, assignment searched
+==============================================================================
+
+STANDARD German ten-finger discipline (held-out)
+  simulated 48.594 ms/char   weak fingers 28.9%   travel 31.29 mm/char
+  rest: LP->a  LR->s  LM->d  LI->f  RI->j  RM->k  RR->l  RP->ö
+  top   q:LP   w:LR   e:LM   r:LI   t:LI   z:RI   u:RI   i:RM   o:RR   p:RP   ü:RP   +:RP
+  home  a:LP   s:LR   d:LM   f:LI   g:LI   h:RI   j:RI   k:RM   l:RR   ö:RP   ä:RP   #:RP
+  bot   <:LP   y:LP   x:LR   c:LM   v:LI   b:LI   n:RI   m:RI   ,:RM   .:RR   -:RP
+  load: LP  7.8%  LR  8.2%  LM 20.8%  LI 21.3%  RI 18.9%  RM 10.2%  RR 10.4%  RP  2.5%
+
+BEST unconstrained assignment (held-out)
+  simulated 47.026 ms/char   weak fingers 53.6%   travel 43.12 mm/char
+  rest: LP->a  LR->s  LM->d  LI->f  RI->h  RM->j  RR->l  RP->ö
+  top   q:LP   w:LP   e:LP   r:LR   t:LM   z:LI   u:RM   i:RM   o:RP   p:RP   ü:RP   +:RP
+  home  a:LP   s:LR   d:LM   f:LI   g:LI   h:RI   j:RM   k:RR   l:RR   ö:RP   ä:RP   #:RP
+  bot   <:LM   y:LI   x:LI   c:LI   v:LI   b:RI   n:RI   m:RR   ,:RP   .:RP   -:RP
+  load: LP 21.9%  LR 13.1%  LM 11.7%  LI 10.2%  RI 13.9%  RM 10.7%  RR  7.8%  RP 10.8%
+
+BEST assignment with weak-finger load held at or below standard's 28.9% (held-out)
+  simulated 47.456 ms/char   weak fingers 27.9%   travel 41.32 mm/char
+  rest: LP->a  LR->s  LM->f  LI->g  RI->h  RM->j  RR->k  RP->ö
+  top   q:LP   w:LR   e:LM   r:LI   t:LI   z:RI   u:RM   i:RM   o:RM   p:RR   ü:RR   +:RP
+  home  a:LP   s:LR   d:LR   f:LM   g:LI   h:RI   j:RM   k:RR   l:RP   ö:RP   ä:RP   #:RP
+  bot   <:LP   y:LP   x:LR   c:LI   v:LI   b:RI   n:RI   m:RI   ,:RM   .:RM   -:RP
+  load: LP  7.8%  LR 12.5%  LM 15.7%  LI 20.2%  RI 17.2%  RM 18.9%  RR  3.2%  RP  4.4%
+
+==============================================================================
+DECISIVE TEST: beat the standard discipline on simulated time while spending
+no more finger travel and no more weak-finger load
+(caps: travel <= 31.29 mm/char, weak <= 28.9%)
+==============================================================================
+
+BEST assignment inside the box (held-out)
+  simulated 47.925 ms/char   weak fingers 28.9%   travel 31.64 mm/char
+  rest: LP->a  LR->s  LM->d  LI->f  RI->h  RM->k  RR->l  RP->ö
+  top   q:LP   w:LR   e:LM   r:LI   t:LI   z:RI   u:RM   i:RM   o:RP   p:RP   ü:RP   +:RP
+  home  a:LP   s:LR   d:LM   f:LI   g:LI   h:RI   j:RM   k:RM   l:RR   ö:RP   ä:RP   #:RP
+  bot   <:LR   y:LR   x:LR   c:LI   v:LI   b:RI   n:RI   m:RI   ,:RM   .:RR   -:RP
+  load: LP  6.8%  LR  9.1%  LM 17.9%  LI 22.4%  RI 17.2%  RM 13.6%  RR  5.4%  RP  7.5%
+
+  standard : 48.594 ms/char   31.29 mm/char   28.9% weak
+  found    : 47.925 ms/char   31.64 mm/char   28.9% weak
+
+  NO IMPROVEMENT - the standard assignment is Pareto-optimal here
+
+==============================================================================
+time alone: standard 48.594 -> best 47.026 ms/char (-3.23%), but that costs travel 31.3 -> 43.1 mm/char
+and weak-finger load 28.9% -> 53.6%.
+==============================================================================
+written to fingermap_dev-at.txt

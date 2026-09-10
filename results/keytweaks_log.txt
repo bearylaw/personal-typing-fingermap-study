@@ -1,0 +1,24 @@
+================================================================================================
+SINGLE-KEY CHANGES TO THE STANDARD DISCIPLINE (held-out corpus)
+================================================================================================
+standard: 48.594 ms/char   31.29 mm/char travel   28.9% weak-finger load
+
+ key  from   to  reach now  reach after  Δ ms/char   Δ travel   verdict   why
+----------------------------------------------------------------------------------------------------------------------
+   z    RI   LI      30.5mm        38.4mm     -0.034      +0.09        no   z currently right index; left index is 38.4 mm vs 30.5 mm
+   y    LP   LR      21.3mm        21.3mm     -0.006      +0.00      KEEP   y currently left pinky, next to an idle-ish ring finger
+   -    RP   RR      21.3mm        34.3mm     +0.000      +0.00        no   the hyphen, currently the barely-used right pinky
+   6    RI   LI      50.6mm        44.9mm     +0.000      +0.00        no   6 is 44.9 mm from F but 50.6 mm from J
+   <    LP   LR      21.3mm        34.3mm     +0.000      +0.00        no   the ISO extra key, currently left pinky
+   ü    RP   RR      23.8mm        38.4mm     +0.007      +0.08        no   ü currently right pinky at 23.8 mm
+   b    LI   RI      34.3mm        34.3mm     +0.045      +0.00        no   b is exactly equidistant from F and J (34.3 mm each)
+   m    RI   RM      21.3mm        21.3mm     +0.107      +0.00        no   m currently right index; right middle is idle-ish
+   h    RI   RM      19.0mm        38.1mm     +0.139      +1.66        no   h is a right-index stretch at 19.0 mm inward
+   g    LI   LM      19.0mm        38.1mm     +0.262      +0.89        no   g is a left-index stretch at 19.0 mm inward
+   t    LI   LM      23.8mm        38.4mm     +0.475      +2.13        no   t is a long left-index reach at 23.8 mm
+
+load on the standard discipline, for reference:
+  LP 7.8%   LR 8.2%   LM 20.8%   LI 21.3%   RI 18.9%   RM 10.2%   RR 10.4%   RP 2.5%
+
+1 of 11 candidate changes improve time without costing travel.
+  move 'y' from LP to LR

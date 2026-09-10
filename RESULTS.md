@@ -1,136 +1,107 @@
-# Results
+# Results — finger assignment on German/Austrian QWERTZ
 
-Every table here is on **held-out text** unless marked otherwise. Raw run logs are in
-[`results/`](results/). See [docs/METHOD.md](docs/METHOD.md) for what Level 0 / 1 / 2 mean;
-the short version is that Level 0 has no tunable parameters, Level 1 has three physical
-ones that are swept rather than chosen, and Level 2 is a weighted model that no conclusion
-rests on.
+Every table is on **held-out text** (1.11M chars German, 1.90M English, 3.42M Python) that
+the search never saw. Raw run logs are in [`results/`](results/).
 
-Layouts under test: QWERTZ plus the seven published German-optimised layouts, taken
-verbatim from the neo2-llkh driver source. `ZEHN` is this study's result. `MECH` is what
-comes out of optimising the simulator alone with no comfort constraint — kept because its
-failure mode is informative. `ZEHN-w` is the first attempt, optimised against the weighted
-model — kept because it is the negative result the method exists to catch.
+The letters never move. The variable throughout is which finger presses which key.
 
 ---
 
-## 1. Level 0 — no tunable parameters
+## 1. The standard German ten-finger discipline
 
-Geometry and corpus counts only.
+| finger | rests | keys |
+|---|---|---|
+| left pinky | `A` | `^` `1` `Q` `A` `<` `Y` |
+| left ring | `S` | `2` `W` `S` `X` |
+| left middle | `D` | `3` `E` `D` `C` |
+| left index | `F` | `4` `5` `R` `T` `F` `G` `V` `B` |
+| right index | `J` | `6` `7` `Z` `U` `H` `J` `N` `M` |
+| right middle | `K` | `8` `I` `K` `,` |
+| right ring | `L` | `9` `O` `L` `.` |
+| right pinky | `Ö` | `0` `ß` `´` `P` `Ü` `+` `Ö` `Ä` `#` `-` |
 
-| layout | travel HOVER<br>mm/char | travel RETURN<br>mm/char | same-finger<br>% of bigrams | forced serial<br>travel mm/char | busiest<br>finger % | weak-finger<br>load % | hand<br>imbalance |
-|---|---|---|---|---|---|---|---|
-| AdNWzjßf | **9.51** | 16.21 | 1.28 | 4.582 | 18.4 | 41.2 | 3.6 |
-| AdNW | 9.60 | 16.38 | **1.28** | 4.626 | 18.4 | 41.2 | 3.6 |
-| **ZEHN** | 9.63 | 16.68 | 1.39 | **4.485** | 18.7 | **34.8** | **1.0** |
-| MECH | 9.64 | 20.89 | **1.19** | **3.628** | **14.7** | 47.3 | 3.1 |
-| KOY | 9.73 | **16.22** | 1.31 | 4.709 | 18.7 | 38.0 | 3.6 |
-| ZEHN-w | 9.73 | 16.43 | 1.31 | 4.624 | 19.5 | 37.1 | 1.4 |
-| KOU | 10.25 | 16.22 | 1.60 | 4.959 | 20.4 | 38.8 | 3.1 |
-| VOU | 10.68 | 16.80 | 1.73 | 5.151 | 20.4 | 37.6 | 4.8 |
-| Bone | 10.70 | 18.67 | 2.38 | 5.635 | 25.9 | 33.4 | 4.5 |
-| Neo2 | 11.16 | 17.62 | 7.56 | 7.815 | 25.3 | 28.7 | 1.7 |
-| QWERTZ | 14.00 | 31.29 | 8.17 | 8.631 | 21.3 | **28.9** | 8.0 |
+Measured on held-out text:
 
-**HOVER** assumes a finger stays where it last pressed; **RETURN** assumes it goes home
-after every press. The truth is between, so both are reported. QWERTZ is worst under both,
-by a wide margin.
-
-**Forced serial travel** is the movement a finger must make between two keystrokes close
-enough in time (lags 1–4) that it cannot hide behind the other hand. ZEHN has the lowest of
-any layout that respects the comfort constraints.
-
-Note the last two columns together: QWERTZ has the *lowest* weak-finger load of any layout
-here. It achieves that by hammering the index and middle fingers instead — and its hand
-imbalance, 8.0, is by far the worst. Low weak-finger load is not on its own a virtue.
-
-## 2. Level 1 — parallel-finger simulator, 36 parameter settings
-
-Every combination of `GAP ∈ {30, 46, 62, 80} ms`, `DWELL ∈ {24, 32, 45} ms`, and three
-movement-speed settings.
-
-| layout | best ms/char | worst ms/char | mean rank | ranked 1st |
-|---|---|---|---|---|
-| MECH | 30.56 | 80.33 | 1.56 | 34/36 |
-| AdNWzjßf | 30.71 | 80.35 | 2.92 | 0/36 |
-| AdNW | 30.71 | 80.36 | 3.81 | 0/36 |
-| ZEHN-w | 30.70 | 80.36 | 4.53 | 0/36 |
-| KOY | 30.72 | 80.36 | 4.56 | 0/36 |
-| ZEHN | 30.71 | 80.39 | 4.97 | 0/36 |
-| KOU | 30.82 | 80.44 | 7.00 | 0/36 |
-| VOU | 30.85 | 80.48 | 8.00 | 0/36 |
-| Bone | 31.02 | 80.66 | 8.67 | 0/36 |
-| Neo2 | 32.65 | 82.12 | 9.56 | 0/36 |
-| QWERTZ | 32.97 | 82.37 | 10.44 | 2/36 |
-
-QWERTZ ranks first in 2 of 36 — at the slowest sequencing settings, where every layout is
-within a hair of every other and the ordering is effectively arbitrary. That is itself the
-finding in §2 of the README: **at slow typing speeds the layout does not matter.**
-
-| comparison | across the sweep |
+| | value |
 |---|---|
-| ZEHN vs QWERTZ | 0.0% to **16.9%** faster, mean 5.1% |
-| AdNW vs QWERTZ | 0.0% to **16.4%** faster, mean 5.0% |
+| simulated time | 48.594 ms/char |
+| finger travel | 31.29 mm/char |
+| weak-finger load (both pinkies + both rings) | 28.9% |
 
-## 3. The decisive experiment — constrained search
+Load per finger:
 
-Constraint box set to **AdNW's own** home-row share, scissor rate, redirect rate and
-simulated time. Only the weak-finger cap is tightened. TRAIN figures; the search never saw
-the test corpus.
-
-| weak cap | ms/char | weak % | home-row % | scissors % | redirects % | inside the box | layout string |
+| LP | LR | LM | LI | RI | RM | RR | RP |
 |---|---|---|---|---|---|---|---|
-| 41 | 31.772 | 40.8 | 60.7 | 0.08 | 3.44 | **YES** | `jßcwfü.öokzrntsmyieahglpdbvu,äqx` |
-| 38 | 31.848 | 37.9 | 60.7 | 0.08 | 3.42 | **YES** | `jßcwfüöä.ykrntsmuieahglpdbv,xoqz` |
-| **35** | **31.998** | **34.6** | **60.7** | **0.10** | **3.44** | **YES** | `lvdwfj,oqykrstncuieahgßzmbp.üöäx` |
-| 32 | 32.159 | 31.9 | 60.7 | 0.08 | 3.35 | no | `pqo.yvwmxfzhaeiugtnrsbkäö,üdcljß` |
-| 30 | 32.501 | 30.1 | 60.7 | 0.12 | 3.31 | no | `vßlgfü,zäjqsrntduieahpbxcmwy.oök` |
-| 28 | 32.957 | 28.2 | 60.7 | 0.12 | 3.39 | no | `yöopbwmcqvxhaeiudtnrsküäz,.fgljß` |
+| 7.8% | 8.2% | **20.8%** | **21.3%** | 18.9% | 10.2% | 10.4% | **2.5%** |
 
-Reference values for the box: AdNW = 32.064 ms/char, 41.7% weak, 60.7% home, 0.10%
-scissors, 3.43% redirects.
+An even split would be 12.5% each. The left index does **8.5×** the work of the right pinky.
 
-The three infeasible rows fail on time only — they hold the comfort measures but cannot get
-below AdNW's ms/char. **The frontier is real and it stops somewhere between 32% and 35%.**
+## 2. Searching the assignment space
 
-### Held-out confirmation
+An assignment is 7 finger boundaries per row across 3 letter rows — 21 integers, with
+fingers ordered left to right and hands not crossing. The number row follows the top row
+(shifted one column, since it is staggered 1.5u left). Resting keys follow the assignment:
+each finger rests on the home-row key it owns nearest its anatomical column.
 
-| | ms/char | weak % | home-row % | scissors % | redirects % |
-|---|---|---|---|---|---|
-| **ZEHN** | **32.102** | **34.8** | 60.1 | 0.11 | 3.65 |
-| AdNW | 32.198 | 41.2 | 60.1 | 0.11 | 3.71 |
-| AdNWzjßf | 32.194 | 41.2 | 60.1 | 0.08 | 3.71 |
-| KOY | 32.250 | 38.0 | 60.1 | 0.08 | 3.40 |
-| QWERTZ | 36.179 | 28.9 | 25.0 | 5.64 | 12.62 |
+Simulated annealing, 6–8 restarts, 120k–140k iterations each.
 
-## 4. Robustness across workloads
+| objective | time | travel | weak load | verdict |
+|---|---|---|---|---|
+| **standard discipline** | 48.594 | **31.29** | **28.9%** | the baseline |
+| minimise time only | **47.026** (−3.2%) | 43.12 (+37.8%) | 53.6% | buys time with travel |
+| minimise time, weak load ≤ 28.9% | 47.456 (−2.3%) | 41.32 (+32.1%) | 27.9% | same trade |
+| minimise time, travel ≤ 31.29 **and** load ≤ 28.9% | 47.925 (−1.4%) | 31.64 (**+1.1%, over cap**) | 28.9% | **fails the box** |
 
-Held-out text, six different corpus mixes. The layout was searched on `dev-at` only.
+The time-only optimum reassigns fingers so that long reaches happen while that finger is
+idle. The simulated clock improves because the movement hides behind the other hand; the
+hand still has to make the movement. Travel is the parameter-free check that catches this,
+which is why it is in the box.
 
-| workload | layout | ms/char | weak % | home % | scissors % | redirects % |
-|---|---|---|---|---|---|---|
-| dev-at | **ZEHN** | 32.102 | **34.8** | 60.1 | 0.11 | 3.65 |
-| | AdNW | 32.198 | 41.2 | 60.1 | 0.11 | 3.71 |
-| pure German | **ZEHN** | 31.933 | **35.2** | 62.0 | 0.13 | 3.92 |
-| | AdNW | 32.035 | 42.9 | 62.0 | 0.09 | 3.92 |
-| pure English | **ZEHN** | 32.109 | **35.4** | 59.9 | 0.05 | 3.05 |
-| | AdNW | 32.114 | 39.9 | 59.9 | 0.08 | 3.47 |
-| pure code | **ZEHN** | 32.399 | **33.4** | 56.7 | 0.16 | 3.81 |
-| | AdNW | 32.591 | 39.5 | 56.7 | 0.17 | 3.58 |
-| 70% German | **ZEHN** | 32.015 | **35.1** | 61.1 | 0.11 | 3.75 |
-| | AdNW | 32.107 | 42.0 | 61.1 | 0.10 | 3.81 |
-| equal thirds | **ZEHN** | 32.145 | **34.7** | 59.6 | 0.11 | 3.62 |
-| | AdNW | 32.245 | 40.8 | 59.6 | 0.11 | 3.67 |
+**Conclusion: no assignment beats the standard on time without spending more travel.** The
+margin is not large — the best boxed candidate misses by 1.1% of travel — so the honest
+statement is that the standard assignment sits on the frontier, not that it is uniquely
+optimal.
 
-The weak-finger gap ranges from −4.5 (English) to −7.7 (German) points and never reverses.
+For reference, the boxed candidate's assignment differed from standard in four places:
+`<`→left ring, `B`→right index, `J`→right middle, `O`→right pinky. Each of those was then
+tested in isolation (§3) and none survives alone.
 
-Over the 36-point physical sweep, **ZEHN minus AdNW ranges from −0.219 to +0.046 ms/char,
-mean −0.018** — ZEHN is nominally faster in 14 of 36 settings and nominally slower in 22,
-by amounts around 0.1%. **The correct summary is that the speed difference is a wash.**
+## 3. Single-key reassignments
 
-## 5. The symbol layer
+Each candidate moves exactly one key to an adjacent finger, everything else held fixed.
+A change is worth making only if it improves simulated time **and** does not increase
+travel.
 
-1,526,672 symbol and punctuation keystrokes from the Python standard library.
+| key | from | to | reach now | reach after | Δ ms/char | Δ travel | verdict |
+|---|---|---|---|---|---|---|---|
+| `Z` | RI | LI | 30.5 mm | 38.4 mm | −0.034 | +0.09 | no — costs travel |
+| `Y` | LP | LR | 21.3 mm | 21.3 mm | −0.006 | ±0.00 | **KEEP** |
+| `-` | RP | RR | 21.3 mm | 34.3 mm | ±0.000 | ±0.00 | no effect |
+| `6` | RI | LI | 50.6 mm | 44.9 mm | ±0.000 | ±0.00 | geometry only |
+| `<` | LP | LR | 21.3 mm | 34.3 mm | ±0.000 | ±0.00 | no effect |
+| `Ü` | RP | RR | 23.8 mm | 38.4 mm | +0.007 | +0.08 | no |
+| `B` | LI | RI | 34.3 mm | 34.3 mm | +0.045 | ±0.00 | no |
+| `M` | RI | RM | 21.3 mm | 21.3 mm | +0.107 | ±0.00 | no |
+| `H` | RI | RM | 19.0 mm | 38.1 mm | +0.139 | +1.66 | no |
+| `G` | LI | LM | 19.0 mm | 38.1 mm | +0.262 | +0.89 | no |
+| `T` | LI | LM | 23.8 mm | 38.4 mm | +0.475 | +2.13 | no |
+
+**1 of 11 helps, and barely.** `Y` moving from the left pinky to the left ring is worth
+−0.006 ms/char, which is the core of the angle mod (§6).
+
+`B` is the interesting null: it is *exactly* equidistant from `F` and `J` (34.3 mm each), so
+the choice looks arbitrary. It is not — giving it to the right index costs +0.045 ms/char,
+because `B` follows and precedes left-hand letters far more often than right-hand ones in
+German, and the right index is already busy with `H U N M Z`.
+
+## 4. The symbol layer
+
+Where the standard discipline genuinely does badly, and it is not the letters. Measured
+over **1,526,672** symbol and punctuation keystrokes from the Python standard library.
+
+AltGr is a **right-thumb** key. Cost model: base key cost, plus the modifier's own cost,
+plus a penalty when modifier and key fall on the same hand (the hand is committed while it
+reaches), plus a large penalty when they fall on the same finger.
 
 | char | count | share | QWERTZ | cost | Neo layer 3 | cost | Δ |
 |---|---|---|---|---|---|---|---|
@@ -152,13 +123,15 @@ by amounts around 0.1%. **The correct summary is that the speed difference is a 
 | `;` | 4,031 | 0.3% | Shift `,` | 3.05 | Mod3 `-` | 4.63 | **+1.58** |
 | | **all** | | | **3.77** | | **2.29** | **−39.2%** |
 
-Two characters get worse — `#` and `;` — and they are shown rather than dropped.
+Two characters get worse — `#` and `;` — and are shown rather than dropped.
 
-AltGr is modelled as a **right-thumb** key. An earlier version modelled it as a right pinky
-and produced costs around 13 units for `\` and `}`; that was wrong and the corrected model
-is what is tabulated.
+An earlier version of this model treated AltGr as a right-*pinky* key and produced costs
+around 13 units for `\` and `}`. That was wrong; the corrected thumb model is what is
+tabulated.
 
-## 6. Shift and Backspace
+## 5. Shift discipline
+
+German capitalises every noun, so a German typist shifts far more often than an English one.
 
 | corpus | capitals as % of letters |
 |---|---|
@@ -172,17 +145,33 @@ Cost per capital, opposite-hand Shift versus same-hand:
 |---|---|---|---|---|---|---|
 | QWERTZ | 2.76 | 4.95 | **+79%** | 2.97 | 5.60 | +89% |
 | Neo2 | 2.81 | 5.08 | +81% | 2.64 | 4.65 | +76% |
-| AdNW | 2.92 | 6.41 | **+120%** | 2.66 | 5.27 | +98% |
+| AdNW | 2.92 | 6.41 | +120% | 2.66 | 5.27 | +98% |
 | KOY | 2.91 | 6.40 | +120% | 2.62 | 5.23 | +100% |
 
-At German capitalisation rates, using the wrong Shift costs about **4.2% of total typing
-effort**. The optimised layouts are *more* sensitive to this than QWERTZ, because they put
-more frequent letters on the pinkies — the same fact as finding 3, showing up again.
+At modern German capitalisation rates, using the wrong Shift costs about **4.2% of total
+typing effort**. It is the largest habit-level saving available on the letters.
 
-Backspace sits 57 mm from the right pinky's home key; modelled cost 6.30 effort units
-against roughly 0.35 for a thumb key.
+## 6. The ISO angle mod
 
-| backspace as % of keystrokes | effort saved |
+The left bottom row shifts one key left onto `<`: pinky takes `<`, ring `Y`, middle `X`,
+index `C` and `V`. The letter-to-finger *ordering* is unchanged, so only geometry improves.
+
+| layout | effort standard | angle | change | travel standard | angle |
+|---|---|---|---|---|---|
+| QWERTZ | 2707.7 | 2691.8 | **−0.6%** | 31292 | 30842 |
+| Neo2 | 2145.9 | 2142.3 | −0.2% | 17623 | 17475 |
+| AdNW | 1751.3 | 1750.5 | −0.0% | 16385 | 16356 |
+| KOY | 1763.2 | 1762.1 | −0.1% | 16223 | 16189 |
+
+Free, and small. QWERTZ benefits most because the mod mainly rescues `B` at 34.3 mm, and an
+optimised layout would not have put a common letter there.
+
+## 7. Backspace
+
+Backspace sits 57 mm from the right pinky's resting key — the longest reach on the board.
+Modelled cost 6.30 effort units against roughly 0.35 for a thumb key.
+
+| Backspace as % of keystrokes | effort saved |
 |---|---|
 | 2.0% | 4.4% |
 | 4.0% | 8.8% |
@@ -190,80 +179,55 @@ against roughly 0.35 for a thumb key.
 | 6.5% | 14.3% |
 | 8.0% | 17.6% |
 
-## 7. The ISO angle mod
+Rates from Dhakal et al., CHI 2018 (136M keystrokes): 5.9% for trained typists, 6.5% for
+untrained, KSPC 1.173, Backspace among the three most-pressed keys.
 
-Left bottom row shifted one key left onto the `<` key; fingers keep their columns, so the
-letter-to-finger mapping is unchanged and only the geometry improves.
+## 8. Reach from each finger's resting key
 
-| layout | effort standard | angle | change | travel standard | angle |
-|---|---|---|---|---|---|
-| QWERTZ | 2707.7 | 2691.8 | **−0.6%** | 31292 | 30842 |
-| ZEHN | 1681.1 | 1673.8 | −0.4% | 16426 | 16193 |
-| Neo2 | 2145.9 | 2142.3 | −0.2% | 17623 | 17475 |
-| AdNW | 1751.3 | 1750.5 | −0.0% | 16385 | 16356 |
-| KOY | 1763.2 | 1762.1 | −0.1% | 16223 | 16189 |
+| finger | keys, mm |
+|---|---|
+| left pinky (`A`) | q 20 · a 0 · < 21 · y 21 · 1 41 · ^ **51** |
+| left ring (`S`) | w 20 · s 0 · x 21 · 2 41 |
+| left middle (`D`) | e 20 · d 0 · c 21 · 3 41 |
+| left index (`F`) | r 20 · t 24 · f 0 · g 19 · v 21 · b **34** · 4 41 · 5 38 |
+| right index (`J`) | z **31** · u 20 · h 19 · j 0 · n 21 · m 21 · 6 **51** · 7 41 |
+| right middle (`K`) | i 20 · k 0 · , 21 · 8 41 |
+| right ring (`L`) | o 20 · l 0 · . 21 · 9 41 |
+| right pinky (`Ö`) | p 20 · ü 24 · + 38 · ö 0 · ä 19 · # 38 · - 21 · 0 41 · ß 38 · ´ **45** |
 
-*(Level 2 units — this comparison is about geometry, not about the absolute scale.)*
+Longest reaches: `^` 50.6 · `6` 50.6 · `´` 44.9 · `9`/`3`/`2`/`1`/`8`/`7`/`4`/`0` 40.7 ·
+`ß`/`5`/`+` 38.4 · `#` 38.1 · `b` 34.3 · `z` 30.5.
 
-It helps every layout and it costs nothing, but it is small: it mainly rescues the `b` key
-at 34.3 mm, and an optimised layout already avoids putting a frequent letter there.
+## 9. The simulator, and why it can be trusted
 
-## 8. The negative result, and why weight-perturbation does not rescue it
+The closed-form stall model used inside the searches is validated against the sequential
+simulator on 300k characters of held-out German:
 
-The first search optimised the Level-2 weighted model and produced `ZEHN-w`, scoring 4.7%
-better than the best published layout **on that model**. On the untuned measures it was
-*worse* than AdNW on same-finger bigrams (1.61 vs 1.17) and finger travel (+1.2%), and tied
-on the independent Fitts-law model (+0.1%).
+```
+layout         simulator   closed form     diff
+QWERTZ            48.513        48.996    0.483
+Neo2              47.662        47.982    0.319
+Bone              46.455        46.543    0.088
+AdNW              46.241        46.287    0.046
+AdNWzjßf          46.240        46.286    0.046
+KOY               46.244        46.291    0.047
+KOU               46.328        46.391    0.063
+VOU               46.449        46.536    0.086
 
-The instructive part is what happened next. Perturbing all 25 weights of the Level-2 model
-by ±40%, 200 times, and re-ranking on held-out text:
+correlation 1.0000   ranking identical: True   MAE 0.147 ms/char
+```
 
-| layout | wins % | top-2 % | mean rank | worst rank |
-|---|---|---|---|---|
-| ZEHN-w variants | 39–61 | 98–100 | 1.4–1.6 | 5 |
-| AdNWzjßf | 0.0 | 1.5 | 3.22 | 4 |
-| AdNW | 0.0 | 0.0 | 4.39 | 6 |
-| KOY | 0.5 | 0.5 | 4.44 | 5 |
-| QWERTZ | 0.0 | 0.0 | 10.00 | 10 |
-
-A layout optimised against a model family still wins **99.5%** of randomly perturbed
-weightings *within that family*. Sensitivity analysis over your own parameters looks like
-robustness and is not. This is the single clearest argument for the Level 0 and Level 1
-apparatus, and it is why nothing in findings 1–5 depends on the weighted model.
-
-## 9. Partial moves from QWERTZ
-
-Best layout differing from QWERTZ in at most *k* positions, optimised for simulated time
-only.
-
-| keys moved | train ms/char | test ms/char | vs QWERTZ | share of full gain | weak % |
-|---|---|---|---|---|---|
-| 2 | 34.515 | 34.616 | −4.3% | 38% | 40.6 |
-| 4 | 33.638 | 33.714 | −6.8% | 60% | 42.3 |
-| 6 | 32.629 | 32.767 | −9.4% | 84% | 45.9 |
-| **8** | 32.203 | 32.257 | **−10.8%** | **96%** | 47.2 |
-| 10 | 31.842 | 31.998 | −11.6% | 103% | 47.3 |
-| 12 | 31.723 | 31.928 | −11.8% | 104% | 47.3 |
-| 16 | 31.598 | 31.724 | −12.3% | 109% | 52.4 |
-| 20 | 31.556 | 31.686 | −12.4% | 110% | 49.6 |
-| 26 | 31.459 | 31.654 | −12.5% | 111% | 51.9 |
-| 30 | 31.453 | 31.634 | −12.6% | 111% | 52.3 |
-
-Shares above 100% occur because these are optimised for time alone while ZEHN is
-constrained on four other measures — which is also the caveat: the weak-finger column
-climbs to 46–52%, exactly the trade finding 3 objects to. A partial move worth making would
-need the same constraint box applied.
+The closed form slightly overestimates because it ignores that a stall pushes later
+keystrokes back, giving fingers extra time — a second-order effect, largest for the worst
+layout, so conservative in the direction that matters.
 
 ## Files
 
 | | |
 |---|---|
-| [`results/efficiency_log.txt`](results/efficiency_log.txt) | Levels 0 and 1, raw |
-| [`results/final_log.txt`](results/final_log.txt) | the decisive constrained search |
-| [`results/robustness_log.txt`](results/robustness_log.txt) | six workloads + parameter sweep |
-| [`results/pareto_log.txt`](results/pareto_log.txt) | partial moves |
-| [`results/sensitivity_log.txt`](results/sensitivity_log.txt) | weight perturbation |
-| [`results/multiobj_log.txt`](results/multiobj_log.txt) | the nine-weighting search |
-| [`results/optsim_log.txt`](results/optsim_log.txt) | pure-mechanics optimisation |
-| [`results/frontier_log.txt`](results/frontier_log.txt) | unconstrained speed/load frontier |
-| [`results/constrained_frontier_dev-at.tsv`](results/constrained_frontier_dev-at.tsv) | the frontier table, machine-readable |
+| [`results/fingersearch_log.txt`](results/fingersearch_log.txt) | the assignment search and decisive test |
+| [`results/keytweaks_log.txt`](results/keytweaks_log.txt) | single-key reassignments |
+| [`results/fingermap_dev-at.txt`](results/fingermap_dev-at.txt) | the assignments found, machine-readable |
+| [`results/shift_log.txt`](results/shift_log.txt) | Shift discipline and Backspace |
+| [`results/anglemod_log.txt`](results/anglemod_log.txt) | ISO angle mod |
+| [`results/efficiency_log.txt`](results/efficiency_log.txt) | parameter-free measures and the 36-point sweep |

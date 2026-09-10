@@ -75,7 +75,18 @@ python efficiency.py dev-at
 Produces the Level-0 table (no tunable parameters) and the Level-1 sweep over 36
 parameter combinations. This is the evidence for findings 1–3 in [RESULTS.md](../RESULTS.md).
 
-## Step 3 — the searches, in the order they were actually run
+## Step 3 — the main experiment: the finger assignment
+
+```bash
+python fingersearch.py dev-at    # searches the assignment space; prints the decisive test
+python keytweaks.py dev-at       # single-key reassignments, scored individually
+python fingermap.py              # the map, the load chart and the reach table
+```
+
+`fingersearch.py` must end with a verdict line — either `NO IMPROVEMENT - the standard
+assignment is Pareto-optimal here` or `IMPROVEMENT FOUND`. That single line is the result.
+
+## Step 3b — the layout searches (appendix material, not the subject)
 
 ```bash
 python optimize.py    dev-at 10 300000   # Level-2 weighted model — the negative result
@@ -121,10 +132,13 @@ depend on it at all, which is the point.
 
 ## What would falsify the main finding
 
-The claim is that a layout exists which matches AdNW on home-row share, scissors,
-redirects and simulated time while carrying materially less weak-finger load.
+The claim is that the standard German finger assignment cannot be beaten on simulated time
+without spending more finger travel or more weak-finger load.
 
-It is falsified if `final_search.py` reports `no` in the feasibility column at every cap
-below AdNW's own 41.7% — that is, if tightening the weak-finger constraint always forces
-one of the other measures out of the box. The run reported here does not, but the check is
-one command and the constraint box is set from AdNW's numbers, not chosen by hand.
+It is falsified by any assignment that comes in strictly under all three of the standard's
+numbers — 48.594 ms/char, 31.29 mm/char travel, 28.9% weak-finger load. `fingersearch.py`
+searches for exactly that and prints its own verdict. The caps are set from the standard
+discipline's own measurements, not chosen by hand.
+
+*(The appendix layout study has its own falsification test, described in
+[APPENDIX-layout.md](APPENDIX-layout.md).)*
