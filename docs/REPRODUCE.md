@@ -4,8 +4,8 @@ Python 3.12, `numpy`, `matplotlib`. Nothing else. No GPU, no network beyond the 
 download. The whole study runs in about 45 minutes on one core.
 
 ```bash
-git clone https://github.com/<you>/public-keyboard-paper
-cd public-keyboard-paper/src
+git clone https://github.com/<you>/personal-typing-fingermap-study
+cd personal-typing-fingermap-study/src
 pip install numpy matplotlib
 ```
 
